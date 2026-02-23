@@ -6,57 +6,57 @@
 
 @layer base {
   :root {
-    --background: 30 25% 18%;
-    --foreground: 35 30% 90%;
+    --background: 25 30% 8%;
+    --foreground: 35 20% 80%;
 
-    --card: 35 35% 78%;
-    --card-foreground: 25 40% 15%;
+    --card: 30 20% 65%;
+    --card-foreground: 20 40% 10%;
 
-    --popover: 30 30% 22%;
-    --popover-foreground: 35 30% 90%;
+    --popover: 25 25% 12%;
+    --popover-foreground: 35 20% 80%;
 
-    --primary: 25 60% 35%;
-    --primary-foreground: 35 30% 95%;
+    --primary: 25 50% 28%;
+    --primary-foreground: 35 25% 90%;
 
-    --secondary: 30 25% 25%;
-    --secondary-foreground: 35 30% 85%;
+    --secondary: 25 20% 14%;
+    --secondary-foreground: 35 20% 75%;
 
-    --muted: 30 15% 30%;
-    --muted-foreground: 30 15% 60%;
+    --muted: 25 12% 18%;
+    --muted-foreground: 25 10% 50%;
 
-    --accent: 35 50% 45%;
-    --accent-foreground: 35 30% 95%;
+    --accent: 30 40% 35%;
+    --accent-foreground: 35 25% 90%;
 
-    --destructive: 0 65% 50%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 60% 42%;
+    --destructive-foreground: 0 0% 95%;
 
-    --border: 30 20% 35%;
-    --input: 30 20% 30%;
-    --ring: 25 60% 35%;
+    --border: 25 15% 22%;
+    --input: 25 15% 18%;
+    --ring: 25 50% 28%;
 
     --radius: 0.25rem;
 
     /* Custom board tokens */
-    --cork: 33 35% 62%;
-    --cork-dark: 30 30% 50%;
-    --wood-frame: 25 45% 12%;
-    --wood-frame-light: 25 35% 20%;
-    --pin-red: 0 70% 45%;
-    --pin-gold: 42 80% 55%;
-    --string-agreement: 120 50% 35%;
-    --string-evolution: 45 80% 50%;
-    --string-disagreement: 0 70% 45%;
-    --paper-aged: 38 40% 88%;
-    --paper-shadow: 30 20% 25%;
+    --cork: 28 25% 28%;
+    --cork-dark: 25 20% 18%;
+    --wood-frame: 20 40% 8%;
+    --wood-frame-light: 20 30% 14%;
+    --pin-red: 0 65% 40%;
+    --pin-gold: 42 75% 48%;
+    --string-agreement: 120 45% 32%;
+    --string-evolution: 45 70% 45%;
+    --string-disagreement: 0 65% 40%;
+    --paper-aged: 35 30% 78%;
+    --paper-shadow: 20 25% 10%;
 
-    --sidebar-background: 30 25% 15%;
-    --sidebar-foreground: 35 30% 85%;
-    --sidebar-primary: 25 60% 35%;
-    --sidebar-primary-foreground: 35 30% 95%;
-    --sidebar-accent: 30 25% 22%;
-    --sidebar-accent-foreground: 35 30% 85%;
-    --sidebar-border: 30 20% 25%;
-    --sidebar-ring: 25 60% 35%;
+    --sidebar-background: 25 25% 8%;
+    --sidebar-foreground: 35 20% 75%;
+    --sidebar-primary: 25 50% 28%;
+    --sidebar-primary-foreground: 35 25% 90%;
+    --sidebar-accent: 25 20% 14%;
+    --sidebar-accent-foreground: 35 20% 75%;
+    --sidebar-border: 25 15% 16%;
+    --sidebar-ring: 25 50% 28%;
   }
 }
 
@@ -73,7 +73,7 @@
   }
 }
 
-/* Cork board texture - uses photorealistic image */
+/* Cork board texture - dark noir atmosphere */
 .cork-texture {
   background-color: hsl(var(--cork));
   background-size: cover;
@@ -81,23 +81,32 @@
   background-repeat: no-repeat;
 }
 
-/* Wood frame - uses photorealistic image */
+.cork-texture::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 40%, transparent 30%, hsl(0 0% 0% / 0.5) 100%);
+  z-index: 1;
+}
+
+/* Wood frame - dark */
 .wood-frame {
   border: 14px solid transparent;
   border-image: var(--wood-frame-image) 30 round;
   box-shadow:
-    inset 0 0 30px hsl(0 0% 0% / 0.3),
-    0 8px 32px hsl(0 0% 0% / 0.6);
+    inset 0 0 50px hsl(0 0% 0% / 0.5),
+    0 8px 32px hsl(0 0% 0% / 0.8);
 }
 
-/* Aged paper effect for cards - uses photorealistic texture */
+/* Aged paper effect for cards */
 .aged-paper {
   background-size: cover;
   background-position: center;
   box-shadow:
-    2px 3px 12px hsl(var(--paper-shadow) / 0.5),
-    0 1px 3px hsl(var(--paper-shadow) / 0.3),
-    inset 0 0 20px hsl(var(--paper-shadow) / 0.05);
+    2px 4px 16px hsl(0 0% 0% / 0.6),
+    0 1px 4px hsl(0 0% 0% / 0.4),
+    inset 0 0 20px hsl(var(--paper-shadow) / 0.1);
 }
 
 /* Pin styles - more realistic 3D pins */
