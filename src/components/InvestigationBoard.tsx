@@ -9,11 +9,14 @@ import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import corkBg from '@/assets/cork-bg.jpg';
 import woodFrame from '@/assets/wood-frame.jpg';
+import platoImg from '@/assets/plato.jpg';
+import aristotleImg from '@/assets/aristotle.jpg';
+import socratesImg from '@/assets/socrates.jpg';
 
 const initialCards: BoardCard[] = [
-  { id: '1', title: 'Πλάτων', description: 'Θεωρία των Ιδεών, η Πολιτεία, η Ανάμνηση', type: 'suspect', x: 80, y: 60, rotation: -2 },
-  { id: '2', title: 'Αριστοτέλης', description: 'Μαθητής του Πλάτωνα, εμπειρισμός', type: 'suspect', x: 400, y: 80, rotation: 1.5 },
-  { id: '3', title: 'Σωκράτης', description: 'Η μαιευτική μέθοδος, «Εν οίδα ότι ουδέν οίδα»', type: 'suspect', x: 700, y: 60, rotation: -1 },
+  { id: '1', title: 'Πλάτων', description: 'Θεωρία των Ιδεών, η Πολιτεία, η Ανάμνηση', type: 'suspect', imageUrl: platoImg, x: 80, y: 60, rotation: -2 },
+  { id: '2', title: 'Αριστοτέλης', description: 'Μαθητής του Πλάτωνα, εμπειρισμός', type: 'suspect', imageUrl: aristotleImg, x: 400, y: 80, rotation: 1.5 },
+  { id: '3', title: 'Σωκράτης', description: 'Η μαιευτική μέθοδος, «Εν οίδα ότι ουδέν οίδα»', type: 'suspect', imageUrl: socratesImg, x: 700, y: 60, rotation: -1 },
   { id: '4', title: 'Η Ανάμνηση', description: 'Η ψυχή γνωρίζει ήδη τις αλήθειες πριν τη γέννηση', type: 'evidence', x: 150, y: 280, rotation: 3 },
   { id: '5', title: 'Η Προϋπαρξη', description: 'Η ψυχή υπάρχει πριν το σώμα', type: 'evidence', x: 500, y: 300, rotation: -2.5 },
   { id: '6', title: 'Σημείωση', description: 'Ελέγξτε τη σύνδεση μεταξύ ανάμνησης και μαιευτικής', type: 'note', x: 350, y: 180, rotation: 4 },
