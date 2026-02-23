@@ -1,6 +1,7 @@
 import { useRef, useCallback, useState } from 'react';
 import { BoardCard } from '@/types/board';
 import { X, GripVertical } from 'lucide-react';
+import paperTexture from '@/assets/paper-texture.jpg';
 
 interface Props {
   card: BoardCard;
@@ -60,10 +61,12 @@ export default function BoardCardComponent({
       <div className={`pin ${pinColor}`} />
 
       {/* Card body */}
-      <div className={`aged-paper rounded-sm p-3 cursor-grab active:cursor-grabbing ${card.type === 'note' ? 'bg-yellow-100/90' : ''}`}
-        style={card.type === 'note' ? {
-          background: 'linear-gradient(135deg, hsl(50 80% 85%) 0%, hsl(48 70% 78%) 100%)',
-        } : undefined}
+      <div className={`aged-paper rounded-sm p-3 cursor-grab active:cursor-grabbing`}
+        style={{
+          backgroundImage: card.type === 'note'
+            ? 'linear-gradient(135deg, hsl(50 80% 85%) 0%, hsl(48 70% 78%) 100%)'
+            : `url(${paperTexture})`,
+        }}
       >
         {/* Delete button */}
         <button

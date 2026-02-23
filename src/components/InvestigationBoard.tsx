@@ -7,6 +7,8 @@ import ConnectionDialog from './ConnectionDialog';
 import { Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
+import corkBg from '@/assets/cork-bg.jpg';
+import woodFrame from '@/assets/wood-frame.jpg';
 
 const initialCards: BoardCard[] = [
   { id: '1', title: 'Πλάτων', description: 'Θεωρία των Ιδεών, η Πολιτεία, η Ανάμνηση', type: 'suspect', x: 80, y: 60, rotation: -2 },
@@ -100,7 +102,15 @@ export default function InvestigationBoard() {
       </header>
 
       {/* Board */}
-      <div className="flex-1 relative cork-texture wood-frame overflow-auto">
+      <div
+        className="flex-1 relative cork-texture overflow-auto"
+        style={{
+          backgroundImage: `url(${corkBg})`,
+          borderImage: `url(${woodFrame}) 30 round`,
+          borderWidth: 14,
+          borderStyle: 'solid',
+        }}
+      >
         <ConnectionLines
           connections={connections}
           cards={cards}
