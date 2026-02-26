@@ -4,7 +4,8 @@ import BoardCardComponent from './BoardCardComponent';
 import ConnectionLines from './ConnectionLines';
 import AddCardDialog from './AddCardDialog';
 import ConnectionDialog from './ConnectionDialog';
-import { Plus } from 'lucide-react';
+import { Plus, ScrollText } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import corkBg from '@/assets/cork-bg.jpg';
@@ -32,6 +33,7 @@ const initialConnections: Connection[] = [
 let nextId = 10;
 
 export default function InvestigationBoard() {
+  const navigate = useNavigate();
   const [cards, setCards] = useState<BoardCard[]>(initialCards);
   const [connections, setConnections] = useState<Connection[]>(initialConnections);
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -100,6 +102,10 @@ export default function InvestigationBoard() {
           <Button onClick={() => setShowAddDialog(true)} size="sm" className="gap-1.5">
             <Plus size={14} />
             Νέο Στοιχείο
+          </Button>
+          <Button onClick={() => navigate('/conclusion')} size="sm" variant="secondary" className="gap-1.5">
+            <ScrollText size={14} />
+            Συμπέρασμα
           </Button>
         </div>
       </header>
