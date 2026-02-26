@@ -55,7 +55,7 @@ export default function Conclusion() {
             value={conclusion}
             onChange={(e) => setConclusion(e.target.value)}
             rows={12}
-            className="w-full bg-transparent border-card-foreground/15 text-card-foreground placeholder:text-card-foreground/40 text-lg leading-relaxed resize-y"
+            className="w-full bg-transparent border-none text-card-foreground placeholder:text-card-foreground/40 text-base md:text-lg leading-loose resize-y font-bold focus-visible:ring-0 focus-visible:ring-offset-0 px-6 md:px-10"
             style={{
               fontFamily: "'MedievalSharp', cursive",
               color: 'hsl(220, 60%, 15%)',
