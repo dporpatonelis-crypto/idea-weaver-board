@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { BoardCard, Connection, ConnectionType } from '@/types/board';
 import BoardCardComponent from './BoardCardComponent';
 import ConnectionLines from './ConnectionLines';
@@ -13,8 +13,15 @@ import woodFrame from '@/assets/wood-frame.jpg';
 import platoImg from '@/assets/plato.jpg';
 import aristotleImg from '@/assets/aristotle.jpg';
 import socratesImg from '@/assets/socrates.jpg';
+import cluesData from '@/data/clues.json';
 
-const initialCards: BoardCard[] = [
+const imageMap: Record<string, string> = {
+  plato: platoImg,
+  aristotle: aristotleImg,
+  socrates: socratesImg,
+};
+
+const fallbackCards: BoardCard[] = [
   { id: '1', title: 'Πλάτων', description: 'Θεωρία των Ιδεών, η Πολιτεία, η Ανάμνηση', type: 'suspect', imageUrl: platoImg, x: 80, y: 60, rotation: -2 },
   { id: '2', title: 'Αριστοτέλης', description: 'Μαθητής του Πλάτωνα, εμπειρισμός', type: 'suspect', imageUrl: aristotleImg, x: 400, y: 80, rotation: 1.5 },
   { id: '3', title: 'Σωκράτης', description: 'Η μαιευτική μέθοδος, «Εν οίδα ότι ουδέν οίδα»', type: 'suspect', imageUrl: socratesImg, x: 700, y: 60, rotation: -1 },
@@ -22,6 +29,28 @@ const initialCards: BoardCard[] = [
   { id: '5', title: 'Η Προϋπαρξη', description: 'Η ψυχή υπάρχει πριν το σώμα', type: 'evidence', x: 500, y: 300, rotation: -2.5 },
   { id: '6', title: 'Σημείωση', description: 'Ελέγξτε τη σύνδεση μεταξύ ανάμνησης και μαιευτικής', type: 'note', x: 350, y: 180, rotation: 4 },
 ];
+
+function buildCardsFromClues(): BoardCard[] {
+  try {
+    if (!cluesData?.clues?.length) return fallbackCards;
+    const positions = [
+      { x: 80, y: 60 }, { x: 400, y: 80 }, { x: 700, y: 60 },
+      { x: 150, y: 280 }, { x: 500, y: 300 }, { x: 350, y: 180 },
+    ];
+    return cluesData.clues.map((clue, i) => ({
+      id: `clue-${i + 1}`,
+      title: clue.title,
+      description: clue.description,
+      type: (clue.type as BoardCard['type']) || 'evidence',
+      imageUrl: clue.imageUrl ? (imageMap[clue.imageUrl] || clue.imageUrl) : undefined,
+      x: positions[i % positions.length].x + (i >= positions.length ? 50 * Math.floor(i / positions.length) : 0),
+      y: positions[i % positions.length].y + (i >= positions.length ? 50 * Math.floor(i / positions.length) : 0),
+      rotation: (Math.random() - 0.5) * 8,
+    }));
+  } catch {
+    return fallbackCards;
+  }
+}
 
 const initialConnections: Connection[] = [
   { id: 'c1', fromId: '1', toId: '2', type: 'evolution' },
@@ -34,6 +63,7 @@ let nextId = 10;
 
 export default function InvestigationBoard() {
   const navigate = useNavigate();
+  const initialCards = useMemo(() => buildCardsFromClues(), []);
   const [cards, setCards] = useState<BoardCard[]>(initialCards);
   const [connections, setConnections] = useState<Connection[]>(initialConnections);
   const [selectedId, setSelectedId] = useState<string | null>(null);
