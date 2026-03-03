@@ -1,19 +1,51 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { ArrowLeft } from 'lucide-react';
 import parchmentBg from '@/assets/parchment-bg.png';
 
+const fullText =
+  'Μετά από προσεκτική εξέταση του πίνακα έρευνας, οι βασικές διαπιστώσεις είναι:\n\n' +
+  '• Ο Σωκράτης επηρέασε βαθιά τον Πλάτωνα μέσω της μαιευτικής μεθόδου.\n' +
+  '• Ο Πλάτων ανέπτυξε τη Θεωρία των Ιδεών και τη θεωρία της Ανάμνησης.\n' +
+  '• Ο Αριστοτέλης, μαθητής του Πλάτωνα, διαφώνησε με την Προϋπαρξη της ψυχής.\n\n' +
+  'Συμπέρασμα: Η φιλοσοφική σκέψη εξελίχθηκε μέσω διαλόγου, συμφωνίας και αντίθεσης.';
+
+function useTypewriter(text: string, speed = 40) {
+  const [displayed, setDisplayed] = useState('');
+  const [done, setDone] = useState(false);
+  const indexRef = useRef(0);
+
+  useEffect(() => {
+    indexRef.current = 0;
+    setDisplayed('');
+    setDone(false);
+
+    const interval = setInterval(() => {
+      indexRef.current += 1;
+      if (indexRef.current >= text.length) {
+        setDisplayed(text);
+        setDone(true);
+        clearInterval(interval);
+      } else {
+        setDisplayed(text.slice(0, indexRef.current));
+      }
+    }, speed);
+
+    return () => clearInterval(interval);
+  }, [text, speed]);
+
+  return { displayed, done };
+}
+
 export default function Conclusion() {
   const navigate = useNavigate();
-  const [conclusion, setConclusion] = useState(
-    'Μετά από προσεκτική εξέταση του πίνακα έρευνας, οι βασικές διαπιστώσεις είναι:\n\n' +
-    '• Ο Σωκράτης επηρέασε βαθιά τον Πλάτωνα μέσω της μαιευτικής μεθόδου.\n' +
-    '• Ο Πλάτων ανέπτυξε τη Θεωρία των Ιδεών και τη θεωρία της Ανάμνησης.\n' +
-    '• Ο Αριστοτέλης, μαθητής του Πλάτωνα, διαφώνησε με την Προϋπαρξη της ψυχής.\n\n' +
-    'Συμπέρασμα: Η φιλοσοφική σκέψη εξελίχθηκε μέσω διαλόγου, συμφωνίας και αντίθεσης.'
-  );
+  const { displayed, done } = useTypewriter(fullText, 35);
+  const [edited, setEdited] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
+
+  const shownText = isEditing ? edited : displayed;
 
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6">
@@ -51,18 +83,32 @@ export default function Conclusion() {
             </p>
           </div>
 
-          <Textarea
-            value={conclusion}
-            onChange={(e) => setConclusion(e.target.value)}
-            rows={12}
-            className="w-full bg-transparent border-none text-card-foreground placeholder:text-card-foreground/40 text-base md:text-lg leading-loose resize-y font-bold focus-visible:ring-0 focus-visible:ring-offset-0 px-6 md:px-10"
-            style={{
-              fontFamily: "'MedievalSharp', cursive",
-              color: 'hsl(220, 60%, 15%)',
-              caretColor: 'hsl(220, 60%, 15%)',
-            }}
-            placeholder="Γράψτε τα συμπεράσματά σας εδώ..."
-          />
+          {!isEditing && !done ? (
+            <pre
+              className="w-full whitespace-pre-wrap text-base md:text-lg leading-loose font-bold px-6 md:px-10 min-h-[16rem]"
+              style={{
+                fontFamily: "'MedievalSharp', cursive",
+                color: 'hsl(220, 60%, 15%)',
+              }}
+            >
+              {displayed}
+              <span className="inline-block w-0.5 h-5 bg-card-foreground/70 animate-pulse ml-0.5 align-text-bottom" />
+            </pre>
+          ) : (
+            <Textarea
+              value={isEditing ? edited : displayed}
+              onChange={(e) => { setIsEditing(true); setEdited(e.target.value); }}
+              onFocus={() => { if (!isEditing) { setEdited(displayed); setIsEditing(true); } }}
+              rows={12}
+              className="w-full bg-transparent border-none text-card-foreground placeholder:text-card-foreground/40 text-base md:text-lg leading-loose resize-y font-bold focus-visible:ring-0 focus-visible:ring-offset-0 px-6 md:px-10"
+              style={{
+                fontFamily: "'MedievalSharp', cursive",
+                color: 'hsl(220, 60%, 15%)',
+                caretColor: 'hsl(220, 60%, 15%)',
+              }}
+              placeholder="Γράψτε τα συμπεράσματά σας εδώ..."
+            />
+          )}
 
           {/* Red wax seal */}
           <div className="flex justify-center pt-4">
