@@ -13,12 +13,13 @@ interface Props {
   onMove: (id: string, x: number, y: number) => void;
   onDelete: (id: string) => void;
   onConnectionStart: (id: string) => void;
+  onUnflip: (id: string) => void;
 }
 
 const pinColors = ['pin-red', 'pin-gold'];
 
 export default function BoardCardComponent({
-  card, isSelected, isConnecting, isFlipped, onSelect, onMove, onDelete, onConnectionStart,
+  card, isSelected, isConnecting, isFlipped, onSelect, onMove, onDelete, onConnectionStart, onUnflip,
 }: Props) {
   const dragging = useRef(false);
   const offset = useRef({ x: 0, y: 0 });
@@ -133,11 +134,11 @@ export default function BoardCardComponent({
             <video
               src={evolutionVideo}
               autoPlay
-              loop
               muted
               playsInline
               className="w-full h-full object-cover rounded-sm"
               style={{ minHeight: 140 }}
+              onEnded={() => onUnflip(card.id)}
             />
             <div className="absolute bottom-1 left-1 right-1">
               <span className="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-sm font-semibold bg-string-evolution/30 text-string-evolution">

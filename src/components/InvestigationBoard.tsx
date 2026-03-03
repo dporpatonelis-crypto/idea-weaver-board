@@ -121,6 +121,14 @@ export default function InvestigationBoard() {
     setConnections(prev => prev.filter(c => c.id !== id));
   }, []);
 
+  const handleUnflip = useCallback((id: string) => {
+    setFlippedCards(prev => {
+      const next = new Set(prev);
+      next.delete(id);
+      return next;
+    });
+  }, []);
+
   return (
     <div className="w-screen h-screen flex flex-col bg-background overflow-hidden">
       {/* Header */}
@@ -171,6 +179,7 @@ export default function InvestigationBoard() {
             onMove={handleMove}
             onDelete={handleDelete}
             onConnectionStart={handleConnectionStart}
+            onUnflip={handleUnflip}
           />
         ))}
 
