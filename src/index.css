@@ -154,3 +154,31 @@
   transform: rotate(-8deg);
   opacity: 0.85;
 }
+
+/* Card flip animation */
+.flip-container {
+  perspective: 800px;
+}
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.flip-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-front,
+.flip-back {
+  backface-visibility: hidden;
+}
+
+.flip-back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+}

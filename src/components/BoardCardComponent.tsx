@@ -2,11 +2,13 @@ import { useRef, useCallback, useState } from 'react';
 import { BoardCard } from '@/types/board';
 import { X, GripVertical } from 'lucide-react';
 import paperTexture from '@/assets/paper-texture.jpg';
+import evolutionVideo from '@/assets/evolution-video.mp4';
 
 interface Props {
   card: BoardCard;
   isSelected: boolean;
   isConnecting: boolean;
+  isFlipped: boolean;
   onSelect: (id: string) => void;
   onMove: (id: string, x: number, y: number) => void;
   onDelete: (id: string) => void;
@@ -16,7 +18,7 @@ interface Props {
 const pinColors = ['pin-red', 'pin-gold'];
 
 export default function BoardCardComponent({
-  card, isSelected, isConnecting, onSelect, onMove, onDelete, onConnectionStart,
+  card, isSelected, isConnecting, isFlipped, onSelect, onMove, onDelete, onConnectionStart,
 }: Props) {
   const dragging = useRef(false);
   const offset = useRef({ x: 0, y: 0 });
@@ -47,7 +49,7 @@ export default function BoardCardComponent({
 
   return (
     <div
-      className={`absolute select-none transition-shadow duration-200 ${isDragging ? 'z-50 scale-105' : 'z-10'} ${isSelected ? 'ring-2 ring-accent ring-offset-2 ring-offset-cork' : ''}`}
+      className={`absolute select-none transition-shadow duration-200 flip-container ${isDragging ? 'z-50 scale-105' : 'z-10'} ${isSelected ? 'ring-2 ring-accent ring-offset-2 ring-offset-cork' : ''}`}
       style={{
         left: card.x,
         top: card.y,
@@ -60,65 +62,89 @@ export default function BoardCardComponent({
       {/* Pin */}
       <div className={`pin ${pinColor}`} />
 
-      {/* Card body */}
-      <div className={`aged-paper rounded-sm p-3 cursor-grab active:cursor-grabbing`}
-        style={{
-          backgroundImage: card.type === 'note'
-            ? 'linear-gradient(135deg, hsl(50 80% 85%) 0%, hsl(48 70% 78%) 100%)'
-            : `url(${paperTexture})`,
-        }}
-      >
-        {/* Delete button */}
-        <button
-          className="no-drag absolute -top-1 -right-1 w-5 h-5 rounded-full bg-destructive text-destructive-foreground flex items-center justify-center opacity-0 group-hover:opacity-100 hover:opacity-100 transition-opacity text-xs z-20"
-          style={{ opacity: isSelected ? 1 : undefined }}
-          onClick={(e) => { e.stopPropagation(); onDelete(card.id); }}
-        >
-          <X size={10} />
-        </button>
+      <div className={`flip-inner ${isFlipped ? 'flipped' : ''}`}>
+        {/* Front face */}
+        <div className="flip-front">
+          <div className={`aged-paper rounded-sm p-3 cursor-grab active:cursor-grabbing`}
+            style={{
+              backgroundImage: card.type === 'note'
+                ? 'linear-gradient(135deg, hsl(50 80% 85%) 0%, hsl(48 70% 78%) 100%)'
+                : `url(${paperTexture})`,
+            }}
+          >
+            {/* Delete button */}
+            <button
+              className="no-drag absolute -top-1 -right-1 w-5 h-5 rounded-full bg-destructive text-destructive-foreground flex items-center justify-center opacity-0 group-hover:opacity-100 hover:opacity-100 transition-opacity text-xs z-20"
+              style={{ opacity: isSelected ? 1 : undefined }}
+              onClick={(e) => { e.stopPropagation(); onDelete(card.id); }}
+            >
+              <X size={10} />
+            </button>
 
-        {/* Connect handle */}
-        <button
-          className="no-drag absolute -right-2 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-accent text-accent-foreground flex items-center justify-center hover:scale-110 transition-transform z-20"
-          onClick={(e) => { e.stopPropagation(); onConnectionStart(card.id); }}
-          title="Σύνδεση"
-        >
-          <GripVertical size={10} />
-        </button>
+            {/* Connect handle */}
+            <button
+              className="no-drag absolute -right-2 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-accent text-accent-foreground flex items-center justify-center hover:scale-110 transition-transform z-20"
+              onClick={(e) => { e.stopPropagation(); onConnectionStart(card.id); }}
+              title="Σύνδεση"
+            >
+              <GripVertical size={10} />
+            </button>
 
-        {/* Image */}
-        {card.imageUrl && card.type !== 'note' && (
-          <div className="mb-2 overflow-hidden rounded-sm border border-cork-dark/20">
-            <img
-              src={card.imageUrl}
-              alt={card.title}
-              className="w-full h-20 object-cover grayscale-[30%] sepia-[20%]"
-              draggable={false}
-            />
+            {/* Image */}
+            {card.imageUrl && card.type !== 'note' && (
+              <div className="mb-2 overflow-hidden rounded-sm border border-cork-dark/20">
+                <img
+                  src={card.imageUrl}
+                  alt={card.title}
+                  className="w-full h-20 object-cover grayscale-[30%] sepia-[20%]"
+                  draggable={false}
+                />
+              </div>
+            )}
+
+            {/* Title */}
+            <h3 className="font-bold text-sm text-card-foreground leading-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
+              {card.title}
+            </h3>
+
+            {/* Description */}
+            {card.description && (
+              <p className="text-xs text-card-foreground/70 mt-1 leading-snug" style={{ fontFamily: "'Crimson Text', serif" }}>
+                {card.description}
+              </p>
+            )}
+
+            {/* Type badge */}
+            <div className="mt-2 flex items-center gap-1">
+              <span className={`text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-sm font-semibold
+                ${card.type === 'suspect' ? 'bg-pin-red/20 text-pin-red' : ''}
+                ${card.type === 'evidence' ? 'bg-accent/20 text-accent' : ''}
+                ${card.type === 'note' ? 'bg-cork-dark/20 text-cork-dark' : ''}
+              `}>
+                {card.type === 'suspect' ? 'Ύποπτος' : card.type === 'evidence' ? 'Πειστήριο' : 'Σημείωση'}
+              </span>
+            </div>
           </div>
-        )}
+        </div>
 
-        {/* Title */}
-        <h3 className="font-bold text-sm text-card-foreground leading-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
-          {card.title}
-        </h3>
-
-        {/* Description */}
-        {card.description && (
-          <p className="text-xs text-card-foreground/70 mt-1 leading-snug" style={{ fontFamily: "'Crimson Text', serif" }}>
-            {card.description}
-          </p>
-        )}
-
-        {/* Type badge */}
-        <div className="mt-2 flex items-center gap-1">
-          <span className={`text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-sm font-semibold
-            ${card.type === 'suspect' ? 'bg-pin-red/20 text-pin-red' : ''}
-            ${card.type === 'evidence' ? 'bg-accent/20 text-accent' : ''}
-            ${card.type === 'note' ? 'bg-cork-dark/20 text-cork-dark' : ''}
-          `}>
-            {card.type === 'suspect' ? 'Ύποπτος' : card.type === 'evidence' ? 'Πειστήριο' : 'Σημείωση'}
-          </span>
+        {/* Back face - video */}
+        <div className="flip-back">
+          <div className="aged-paper rounded-sm overflow-hidden cursor-grab active:cursor-grabbing" style={{ width: '100%', height: '100%' }}>
+            <video
+              src={evolutionVideo}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover rounded-sm"
+              style={{ minHeight: 140 }}
+            />
+            <div className="absolute bottom-1 left-1 right-1">
+              <span className="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-sm font-semibold bg-string-evolution/30 text-string-evolution">
+                Εξέλιξη
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
