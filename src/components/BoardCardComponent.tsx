@@ -1,4 +1,4 @@
-import { useRef, useCallback, useState } from 'react';
+import { useRef, useCallback, useState, useEffect } from 'react';
 import { BoardCard } from '@/types/board';
 import { X, GripVertical } from 'lucide-react';
 import paperTexture from '@/assets/paper-texture.jpg';
@@ -24,6 +24,39 @@ export default function BoardCardComponent({
   const dragging = useRef(false);
   const offset = useRef({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const unflipTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // When card flips to show video, start a fallback timer
+  useEffect(() => {
+    if (isFlipped) {
+      // Reset and play video
+      if (videoRef.current) {
+        videoRef.current.currentTime = 0;
+        videoRef.current.play().catch(() => {});
+      }
+      // Fallback: unflip after 8 seconds even if onEnded doesn't fire
+      unflipTimerRef.current = setTimeout(() => {
+        onUnflip(card.id);
+      }, 8000);
+    } else {
+      // Clear timer when unflipped
+      if (unflipTimerRef.current) {
+        clearTimeout(unflipTimerRef.current);
+        unflipTimerRef.current = null;
+      }
+      // Pause and reset video
+      if (videoRef.current) {
+        videoRef.current.pause();
+        videoRef.current.currentTime = 0;
+      }
+    }
+    return () => {
+      if (unflipTimerRef.current) {
+        clearTimeout(unflipTimerRef.current);
+      }
+    };
+  }, [isFlipped, card.id, onUnflip]);
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     if ((e.target as HTMLElement).closest('.no-drag')) return;
@@ -132,10 +165,11 @@ export default function BoardCardComponent({
         <div className="flip-back">
           <div className="aged-paper rounded-sm overflow-hidden cursor-grab active:cursor-grabbing" style={{ width: '100%', height: '100%' }}>
             <video
+              ref={videoRef}
               src={evolutionVideo}
-              autoPlay
               muted
               playsInline
+              preload="auto"
               className="w-full h-full object-cover rounded-sm"
               style={{ minHeight: 140 }}
               onEnded={() => onUnflip(card.id)}
