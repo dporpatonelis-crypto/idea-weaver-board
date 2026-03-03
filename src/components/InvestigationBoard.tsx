@@ -71,6 +71,7 @@ export default function InvestigationBoard() {
   const [showAddDialog, setShowAddDialog] = useState(false);
   const [showConnectionDialog, setShowConnectionDialog] = useState(false);
   const [pendingConnectionTo, setPendingConnectionTo] = useState<string | null>(null);
+  const [flippedCards, setFlippedCards] = useState<Set<string>>(new Set());
 
   const handleMove = useCallback((id: string, x: number, y: number) => {
     setCards(prev => prev.map(c => c.id === id ? { ...c, x, y } : c));
@@ -99,6 +100,10 @@ export default function InvestigationBoard() {
     if (connectingFromId && pendingConnectionTo) {
       const id = `c${nextId++}`;
       setConnections(prev => [...prev, { id, fromId: connectingFromId, toId: pendingConnectionTo, type }]);
+      // Flip the target card when connection type is "evolution"
+      if (type === 'evolution') {
+        setFlippedCards(prev => new Set(prev).add(pendingConnectionTo));
+      }
     }
     setConnectingFromId(null);
     setPendingConnectionTo(null);
@@ -161,6 +166,7 @@ export default function InvestigationBoard() {
             card={card}
             isSelected={selectedId === card.id}
             isConnecting={connectingFromId === card.id}
+            isFlipped={flippedCards.has(card.id)}
             onSelect={setSelectedId}
             onMove={handleMove}
             onDelete={handleDelete}
