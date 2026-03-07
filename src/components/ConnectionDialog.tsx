@@ -28,7 +28,21 @@ export default function ConnectionDialog({ open, onClose, onSelect }: Props) {
           <DialogTitle className="text-foreground">Τύπος Σύνδεσης</DialogTitle>
         </DialogHeader>
         <div className="flex flex-col gap-2">
-          {options.map((opt) => (
+          <p className="text-xs text-muted-foreground uppercase tracking-wider">Φιλοσοφία</p>
+          {philosophyOptions.map((opt) => (
+            <Button
+              key={opt.type}
+              variant="outline"
+              className="justify-start gap-3 text-foreground"
+              onClick={() => { onSelect(opt.type); onClose(); }}
+            >
+              <span className={`w-4 h-4 rounded-full ${opt.color}`} />
+              <span className="text-lg">{opt.icon}</span>
+              <span>{opt.label}</span>
+            </Button>
+          ))}
+          <p className="text-xs text-muted-foreground uppercase tracking-wider mt-2">Ιστορία</p>
+          {historyOptions.map((opt) => (
             <Button
               key={opt.type}
               variant="outline"

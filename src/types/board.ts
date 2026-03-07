@@ -9,7 +9,7 @@ export interface BoardCard {
   rotation: number;
 }
 
-export type ConnectionType = 'agreement' | 'evolution' | 'disagreement';
+export type ConnectionType = 'agreement' | 'evolution' | 'disagreement' | 'cause' | 'occasion' | 'consequence';
 
 export interface Connection {
   id: string;

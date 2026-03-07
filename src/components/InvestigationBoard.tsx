@@ -216,6 +216,15 @@ export default function InvestigationBoard() {
             <div className="flex items-center gap-2 text-xs text-card-foreground">
               <span className="w-6 h-0.5 bg-string-disagreement" /> Αντίθεση
             </div>
+            <div className="flex items-center gap-2 text-xs text-card-foreground">
+              <span className="w-6 h-0.5 bg-string-cause" /> Αιτία
+            </div>
+            <div className="flex items-center gap-2 text-xs text-card-foreground">
+              <span className="w-6 h-0.5 bg-string-occasion" /> Αφορμή
+            </div>
+            <div className="flex items-center gap-2 text-xs text-card-foreground">
+              <span className="w-6 h-0.5 bg-string-consequence" /> Συνέπεια
+            </div>
           </div>
         </div>
       </div>
