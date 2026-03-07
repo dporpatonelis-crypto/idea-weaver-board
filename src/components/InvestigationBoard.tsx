@@ -71,7 +71,7 @@ export default function InvestigationBoard() {
   const [showAddDialog, setShowAddDialog] = useState(false);
   const [showConnectionDialog, setShowConnectionDialog] = useState(false);
   const [pendingConnectionTo, setPendingConnectionTo] = useState<string | null>(null);
-  const [flippedCards, setFlippedCards] = useState<Set<string>>(new Set());
+  const [flippedCards, setFlippedCards] = useState<Map<string, ConnectionType>>(new Map());
 
   const handleMove = useCallback((id: string, x: number, y: number) => {
     setCards(prev => prev.map(c => c.id === id ? { ...c, x, y } : c));
