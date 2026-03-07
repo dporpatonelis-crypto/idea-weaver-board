@@ -100,9 +100,13 @@ export default function InvestigationBoard() {
     if (connectingFromId && pendingConnectionTo) {
       const id = `c${nextId++}`;
       setConnections(prev => [...prev, { id, fromId: connectingFromId, toId: pendingConnectionTo, type }]);
-      // Flip the target card when connection type is "evolution"
-      if (type === 'evolution') {
-        setFlippedCards(prev => new Set(prev).add(pendingConnectionTo));
+      // Flip the target card when connection type is "evolution" or "agreement"
+      if (type === 'evolution' || type === 'agreement') {
+        setFlippedCards(prev => {
+          const next = new Map(prev);
+          next.set(pendingConnectionTo, type);
+          return next;
+        });
       }
     }
     setConnectingFromId(null);
