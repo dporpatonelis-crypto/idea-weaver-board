@@ -42,7 +42,7 @@ function buildCardsFromClues(): BoardCard[] {
       title: clue.title,
       description: clue.description,
       type: (clue.type as BoardCard['type']) || 'evidence',
-      imageUrl: clue.imageUrl ? (imageMap[clue.imageUrl] || clue.imageUrl) : undefined,
+      imageUrl: (clue as any).imageUrl ? (imageMap[(clue as any).imageUrl] || (clue as any).imageUrl) : undefined,
       x: positions[i % positions.length].x + (i >= positions.length ? 50 * Math.floor(i / positions.length) : 0),
       y: positions[i % positions.length].y + (i >= positions.length ? 50 * Math.floor(i / positions.length) : 0),
       rotation: (Math.random() - 0.5) * 8,
