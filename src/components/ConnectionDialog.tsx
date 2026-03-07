@@ -8,10 +8,16 @@ interface Props {
   onSelect: (type: ConnectionType) => void;
 }
 
-const options: { type: ConnectionType; label: string; color: string; icon: string }[] = [
+const philosophyOptions: { type: ConnectionType; label: string; color: string; icon: string }[] = [
   { type: 'agreement', label: 'Συμφωνία', color: 'bg-string-agreement', icon: '✓' },
   { type: 'evolution', label: 'Εξέλιξη', color: 'bg-string-evolution', icon: '→' },
   { type: 'disagreement', label: 'Αντίθεση', color: 'bg-string-disagreement', icon: '✗' },
+];
+
+const historyOptions: { type: ConnectionType; label: string; color: string; icon: string }[] = [
+  { type: 'cause', label: 'Αιτία', color: 'bg-string-cause', icon: '⚡' },
+  { type: 'occasion', label: 'Αφορμή', color: 'bg-string-occasion', icon: '🔔' },
+  { type: 'consequence', label: 'Συνέπεια', color: 'bg-string-consequence', icon: '📌' },
 ];
 
 export default function ConnectionDialog({ open, onClose, onSelect }: Props) {
