@@ -10,6 +10,7 @@ interface Props {
   isSelected: boolean;
   isConnecting: boolean;
   isFlipped: boolean;
+  flipType?: ConnectionType;
   onSelect: (id: string) => void;
   onMove: (id: string, x: number, y: number) => void;
   onDelete: (id: string) => void;
