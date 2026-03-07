@@ -30,6 +30,15 @@ const fallbackCards: BoardCard[] = [
   { id: '6', title: 'Σημείωση', description: 'Ελέγξτε τη σύνδεση μεταξύ ανάμνησης και μαιευτικής', type: 'note', x: 350, y: 180, rotation: 4 },
 ];
 
+function extractImageUrl(description: string): { text: string; imageUrl?: string } {
+  // Match a URL at the end of the description, after a comma/space
+  const urlMatch = description.match(/,\s*(https?:\/\/\S+\.(?:png|jpg|jpeg|gif|webp)\S*)\s*$/i);
+  if (urlMatch) {
+    return { text: description.slice(0, urlMatch.index).trim(), imageUrl: urlMatch[1] };
+  }
+  return { text: description };
+}
+
 function buildCardsFromClues(): BoardCard[] {
   try {
     if (!cluesData?.clues?.length) return fallbackCards;
@@ -37,16 +46,22 @@ function buildCardsFromClues(): BoardCard[] {
       { x: 80, y: 60 }, { x: 400, y: 80 }, { x: 700, y: 60 },
       { x: 150, y: 280 }, { x: 500, y: 300 }, { x: 350, y: 180 },
     ];
-    return cluesData.clues.map((clue, i) => ({
-      id: `clue-${i + 1}`,
-      title: clue.title,
-      description: clue.description,
-      type: (clue.type as BoardCard['type']) || 'evidence',
-      imageUrl: (clue as any).imageUrl ? (imageMap[(clue as any).imageUrl] || (clue as any).imageUrl) : undefined,
-      x: positions[i % positions.length].x + (i >= positions.length ? 50 * Math.floor(i / positions.length) : 0),
-      y: positions[i % positions.length].y + (i >= positions.length ? 50 * Math.floor(i / positions.length) : 0),
-      rotation: (Math.random() - 0.5) * 8,
-    }));
+    return cluesData.clues.map((clue, i) => {
+      const { text, imageUrl: extractedUrl } = extractImageUrl(clue.description);
+      const resolvedImage = (clue as any).imageUrl
+        ? (imageMap[(clue as any).imageUrl] || (clue as any).imageUrl)
+        : extractedUrl;
+      return {
+        id: `clue-${i + 1}`,
+        title: clue.title,
+        description: text,
+        type: (clue.type as BoardCard['type']) || 'evidence',
+        imageUrl: resolvedImage,
+        x: positions[i % positions.length].x + (i >= positions.length ? 50 * Math.floor(i / positions.length) : 0),
+        y: positions[i % positions.length].y + (i >= positions.length ? 50 * Math.floor(i / positions.length) : 0),
+        rotation: (Math.random() - 0.5) * 8,
+      };
+    });
   } catch {
     return fallbackCards;
   }
