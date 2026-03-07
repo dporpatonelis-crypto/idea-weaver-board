@@ -10,12 +10,18 @@ const typeColors: Record<ConnectionType, string> = {
   agreement: 'hsl(120, 50%, 35%)',
   evolution: 'hsl(45, 80%, 50%)',
   disagreement: 'hsl(0, 70%, 45%)',
+  cause: 'hsl(210, 55%, 45%)',
+  occasion: 'hsl(280, 45%, 50%)',
+  consequence: 'hsl(30, 70%, 45%)',
 };
 
 const typeLabels: Record<ConnectionType, string> = {
   agreement: 'Συμφωνία',
   evolution: 'Εξέλιξη',
   disagreement: 'Αντίθεση',
+  cause: 'Αιτία',
+  occasion: 'Αφορμή',
+  consequence: 'Συνέπεια',
 };
 
 function getCardCenter(card: BoardCard): { x: number; y: number } {

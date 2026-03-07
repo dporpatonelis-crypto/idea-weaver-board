@@ -56,6 +56,9 @@ export default {
         "string-agreement": "hsl(var(--string-agreement))",
         "string-evolution": "hsl(var(--string-evolution))",
         "string-disagreement": "hsl(var(--string-disagreement))",
+        "string-cause": "hsl(var(--string-cause))",
+        "string-occasion": "hsl(var(--string-occasion))",
+        "string-consequence": "hsl(var(--string-consequence))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
