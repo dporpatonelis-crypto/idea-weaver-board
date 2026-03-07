@@ -179,6 +179,7 @@ export default function InvestigationBoard() {
             isSelected={selectedId === card.id}
             isConnecting={connectingFromId === card.id}
             isFlipped={flippedCards.has(card.id)}
+            flipType={flippedCards.get(card.id)}
             onSelect={setSelectedId}
             onMove={handleMove}
             onDelete={handleDelete}
