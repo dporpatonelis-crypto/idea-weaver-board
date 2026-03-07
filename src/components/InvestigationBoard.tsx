@@ -42,7 +42,7 @@ function buildCardsFromClues(): BoardCard[] {
       title: clue.title,
       description: clue.description,
       type: (clue.type as BoardCard['type']) || 'evidence',
-      imageUrl: clue.imageUrl ? (imageMap[clue.imageUrl] || clue.imageUrl) : undefined,
+      imageUrl: (clue as any).imageUrl ? (imageMap[(clue as any).imageUrl] || (clue as any).imageUrl) : undefined,
       x: positions[i % positions.length].x + (i >= positions.length ? 50 * Math.floor(i / positions.length) : 0),
       y: positions[i % positions.length].y + (i >= positions.length ? 50 * Math.floor(i / positions.length) : 0),
       rotation: (Math.random() - 0.5) * 8,
@@ -71,7 +71,7 @@ export default function InvestigationBoard() {
   const [showAddDialog, setShowAddDialog] = useState(false);
   const [showConnectionDialog, setShowConnectionDialog] = useState(false);
   const [pendingConnectionTo, setPendingConnectionTo] = useState<string | null>(null);
-  const [flippedCards, setFlippedCards] = useState<Set<string>>(new Set());
+  const [flippedCards, setFlippedCards] = useState<Map<string, ConnectionType>>(new Map());
 
   const handleMove = useCallback((id: string, x: number, y: number) => {
     setCards(prev => prev.map(c => c.id === id ? { ...c, x, y } : c));
@@ -100,9 +100,13 @@ export default function InvestigationBoard() {
     if (connectingFromId && pendingConnectionTo) {
       const id = `c${nextId++}`;
       setConnections(prev => [...prev, { id, fromId: connectingFromId, toId: pendingConnectionTo, type }]);
-      // Flip the target card when connection type is "evolution"
-      if (type === 'evolution') {
-        setFlippedCards(prev => new Set(prev).add(pendingConnectionTo));
+      // Flip the target card when connection type is "evolution" or "agreement"
+      if (type === 'evolution' || type === 'agreement') {
+        setFlippedCards(prev => {
+          const next = new Map(prev);
+          next.set(pendingConnectionTo, type);
+          return next;
+        });
       }
     }
     setConnectingFromId(null);
@@ -123,7 +127,7 @@ export default function InvestigationBoard() {
 
   const handleUnflip = useCallback((id: string) => {
     setFlippedCards(prev => {
-      const next = new Set(prev);
+      const next = new Map(prev);
       next.delete(id);
       return next;
     });
@@ -175,6 +179,7 @@ export default function InvestigationBoard() {
             isSelected={selectedId === card.id}
             isConnecting={connectingFromId === card.id}
             isFlipped={flippedCards.has(card.id)}
+            flipType={flippedCards.get(card.id)}
             onSelect={setSelectedId}
             onMove={handleMove}
             onDelete={handleDelete}

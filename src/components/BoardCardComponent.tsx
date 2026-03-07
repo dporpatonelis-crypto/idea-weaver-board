@@ -1,14 +1,16 @@
 import { useRef, useCallback, useState, useEffect } from 'react';
-import { BoardCard } from '@/types/board';
+import { BoardCard, ConnectionType } from '@/types/board';
 import { X, GripVertical } from 'lucide-react';
 import paperTexture from '@/assets/paper-texture.jpg';
 import evolutionVideo from '@/assets/evolution-video.mp4';
+import agreementVideo from '@/assets/agreement-video.mp4';
 
 interface Props {
   card: BoardCard;
   isSelected: boolean;
   isConnecting: boolean;
   isFlipped: boolean;
+  flipType?: ConnectionType;
   onSelect: (id: string) => void;
   onMove: (id: string, x: number, y: number) => void;
   onDelete: (id: string) => void;
@@ -19,7 +21,7 @@ interface Props {
 const pinColors = ['pin-red', 'pin-gold'];
 
 export default function BoardCardComponent({
-  card, isSelected, isConnecting, isFlipped, onSelect, onMove, onDelete, onConnectionStart, onUnflip,
+  card, isSelected, isConnecting, isFlipped, flipType, onSelect, onMove, onDelete, onConnectionStart, onUnflip,
 }: Props) {
   const dragging = useRef(false);
   const offset = useRef({ x: 0, y: 0 });
@@ -166,7 +168,7 @@ export default function BoardCardComponent({
           <div className="aged-paper rounded-sm overflow-hidden cursor-grab active:cursor-grabbing" style={{ width: '100%', height: '100%' }}>
             <video
               ref={videoRef}
-              src={evolutionVideo}
+              src={flipType === 'agreement' ? agreementVideo : evolutionVideo}
               muted
               playsInline
               preload="auto"
@@ -175,8 +177,10 @@ export default function BoardCardComponent({
               onEnded={() => onUnflip(card.id)}
             />
             <div className="absolute bottom-1 left-1 right-1">
-              <span className="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-sm font-semibold bg-string-evolution/30 text-string-evolution">
-                Εξέλιξη
+              <span className={`text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-sm font-semibold ${
+                flipType === 'agreement' ? 'bg-string-agreement/30 text-string-agreement' : 'bg-string-evolution/30 text-string-evolution'
+              }`}>
+                {flipType === 'agreement' ? 'Συμφωνία' : 'Εξέλιξη'}
               </span>
             </div>
           </div>
