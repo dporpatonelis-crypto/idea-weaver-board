@@ -1,8 +1,9 @@
 import { useRef, useCallback, useState, useEffect } from 'react';
-import { BoardCard } from '@/types/board';
+import { BoardCard, ConnectionType } from '@/types/board';
 import { X, GripVertical } from 'lucide-react';
 import paperTexture from '@/assets/paper-texture.jpg';
 import evolutionVideo from '@/assets/evolution-video.mp4';
+import agreementVideo from '@/assets/agreement-video.mp4';
 
 interface Props {
   card: BoardCard;
