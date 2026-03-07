@@ -30,13 +30,12 @@ const fallbackCards: BoardCard[] = [
   { id: '6', title: 'Σημείωση', description: 'Ελέγξτε τη σύνδεση μεταξύ ανάμνησης και μαιευτικής', type: 'note', x: 350, y: 180, rotation: 4 },
 ];
 
-function extractImageUrl(description: string): { text: string; imageUrl?: string } {
-  // Match a URL at the end of the description, after a comma/space
-  const urlMatch = description.match(/,\s*(https?:\/\/\S+\.(?:png|jpg|jpeg|gif|webp)\S*)\s*$/i);
+function extractImageUrl(text: string): { text: string; imageUrl?: string } {
+  const urlMatch = text.match(/,?\s*(https?:\/\/\S+\.(?:png|jpg|jpeg|gif|webp)\S*)\s*$/i);
   if (urlMatch) {
-    return { text: description.slice(0, urlMatch.index).trim(), imageUrl: urlMatch[1] };
+    return { text: text.slice(0, urlMatch.index).trim(), imageUrl: urlMatch[1] };
   }
-  return { text: description };
+  return { text };
 }
 
 function buildCardsFromClues(): BoardCard[] {
