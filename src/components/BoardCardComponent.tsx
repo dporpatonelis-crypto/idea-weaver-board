@@ -21,7 +21,7 @@ interface Props {
 const pinColors = ['pin-red', 'pin-gold'];
 
 export default function BoardCardComponent({
-  card, isSelected, isConnecting, isFlipped, onSelect, onMove, onDelete, onConnectionStart, onUnflip,
+  card, isSelected, isConnecting, isFlipped, flipType, onSelect, onMove, onDelete, onConnectionStart, onUnflip,
 }: Props) {
   const dragging = useRef(false);
   const offset = useRef({ x: 0, y: 0 });
