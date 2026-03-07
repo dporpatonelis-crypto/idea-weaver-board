@@ -127,7 +127,7 @@ export default function InvestigationBoard() {
 
   const handleUnflip = useCallback((id: string) => {
     setFlippedCards(prev => {
-      const next = new Set(prev);
+      const next = new Map(prev);
       next.delete(id);
       return next;
     });
