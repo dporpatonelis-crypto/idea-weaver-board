@@ -168,7 +168,7 @@ export default function BoardCardComponent({
           <div className="aged-paper rounded-sm overflow-hidden cursor-grab active:cursor-grabbing" style={{ width: '100%', height: '100%' }}>
             <video
               ref={videoRef}
-              src={evolutionVideo}
+              src={flipType === 'agreement' ? agreementVideo : evolutionVideo}
               muted
               playsInline
               preload="auto"
@@ -177,8 +177,10 @@ export default function BoardCardComponent({
               onEnded={() => onUnflip(card.id)}
             />
             <div className="absolute bottom-1 left-1 right-1">
-              <span className="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-sm font-semibold bg-string-evolution/30 text-string-evolution">
-                Εξέλιξη
+              <span className={`text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-sm font-semibold ${
+                flipType === 'agreement' ? 'bg-string-agreement/30 text-string-agreement' : 'bg-string-evolution/30 text-string-evolution'
+              }`}>
+                {flipType === 'agreement' ? 'Συμφωνία' : 'Εξέλιξη'}
               </span>
             </div>
           </div>
