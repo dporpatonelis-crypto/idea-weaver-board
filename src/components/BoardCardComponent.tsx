@@ -179,9 +179,9 @@ export default function BoardCardComponent({
             />
             <div className="absolute bottom-1 left-1 right-1">
               <span className={`text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-sm font-semibold ${
-                flipType === 'agreement' ? 'bg-string-agreement/30 text-string-agreement' : 'bg-string-evolution/30 text-string-evolution'
+                flipType === 'agreement' ? 'bg-string-agreement/30 text-string-agreement' : flipType === 'disagreement' ? 'bg-string-disagreement/30 text-string-disagreement' : 'bg-string-evolution/30 text-string-evolution'
               }`}>
-                {flipType === 'agreement' ? 'Συμφωνία' : 'Εξέλιξη'}
+                {flipType === 'agreement' ? 'Συμφωνία' : flipType === 'disagreement' ? 'Διαφωνία' : 'Εξέλιξη'}
               </span>
             </div>
           </div>

@@ -116,7 +116,7 @@ export default function InvestigationBoard() {
       const id = `c${nextId++}`;
       setConnections(prev => [...prev, { id, fromId: connectingFromId, toId: pendingConnectionTo, type }]);
       // Flip the target card when connection type is "evolution" or "agreement"
-      if (type === 'evolution' || type === 'agreement') {
+      if (type === 'evolution' || type === 'agreement' || type === 'disagreement') {
         setFlippedCards(prev => {
           const next = new Map(prev);
           next.set(pendingConnectionTo, type);
