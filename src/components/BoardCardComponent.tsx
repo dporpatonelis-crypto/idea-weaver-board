@@ -169,7 +169,7 @@ export default function BoardCardComponent({
           <div className="aged-paper rounded-sm overflow-hidden cursor-grab active:cursor-grabbing" style={{ width: '100%', height: '100%' }}>
             <video
               ref={videoRef}
-              src={flipType === 'agreement' ? agreementVideo : evolutionVideo}
+              src={flipType === 'agreement' ? agreementVideo : flipType === 'disagreement' ? disagreementVideo : evolutionVideo}
               muted
               playsInline
               preload="auto"
