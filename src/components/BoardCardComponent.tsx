@@ -4,6 +4,7 @@ import { X, GripVertical } from 'lucide-react';
 import paperTexture from '@/assets/paper-texture.jpg';
 import evolutionVideo from '@/assets/evolution-video.mp4';
 import agreementVideo from '@/assets/agreement-video.mp4';
+import disagreementVideo from '@/assets/disagreement-video.mp4';
 
 interface Props {
   card: BoardCard;
