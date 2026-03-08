@@ -4,6 +4,7 @@ import { X, GripVertical } from 'lucide-react';
 import paperTexture from '@/assets/paper-texture.jpg';
 import evolutionVideo from '@/assets/evolution-video.mp4';
 import agreementVideo from '@/assets/agreement-video.mp4';
+import disagreementVideo from '@/assets/disagreement-video.mp4';
 
 interface Props {
   card: BoardCard;
@@ -168,7 +169,7 @@ export default function BoardCardComponent({
           <div className="aged-paper rounded-sm overflow-hidden cursor-grab active:cursor-grabbing" style={{ width: '100%', height: '100%' }}>
             <video
               ref={videoRef}
-              src={flipType === 'agreement' ? agreementVideo : evolutionVideo}
+              src={flipType === 'agreement' ? agreementVideo : flipType === 'disagreement' ? disagreementVideo : evolutionVideo}
               muted
               playsInline
               preload="auto"
@@ -178,9 +179,9 @@ export default function BoardCardComponent({
             />
             <div className="absolute bottom-1 left-1 right-1">
               <span className={`text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-sm font-semibold ${
-                flipType === 'agreement' ? 'bg-string-agreement/30 text-string-agreement' : 'bg-string-evolution/30 text-string-evolution'
+                flipType === 'agreement' ? 'bg-string-agreement/30 text-string-agreement' : flipType === 'disagreement' ? 'bg-string-disagreement/30 text-string-disagreement' : 'bg-string-evolution/30 text-string-evolution'
               }`}>
-                {flipType === 'agreement' ? 'Συμφωνία' : 'Εξέλιξη'}
+                {flipType === 'agreement' ? 'Συμφωνία' : flipType === 'disagreement' ? 'Διαφωνία' : 'Εξέλιξη'}
               </span>
             </div>
           </div>
