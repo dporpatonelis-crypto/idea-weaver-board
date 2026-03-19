@@ -1,27 +1,35 @@
 {
-  "topic": "Η Μάχη του Μαραθώνα: Αίτια και Συνέπειες",
+  "topic": "Lovable 1st slide dynamic Template",
   "clues": [
     {
-      "title": "Χρυσός Αιώνας (499-400 π.Χ.)",
-      "description": "Το ιστορικό πλαίσιο της Ελληνικής Αρχαιότητας μέσα στο οποίο ξεσπούν οι Περσικοί Πόλεμοι.",
-      "type": "note",
-      "imageUrl": "https://i.ibb.co/FLZDgLRW/Mapping-Classical-Greece.jpg"
-    },
-    {
-      "title": "Γεωγραφικό Στίγμα: Αρχαία Ελλάδα",
-      "description": "Η τοποθεσία της σύγκρουσης (Συντεταγμένες: 38, 23). Πώς επηρέασε το έδαφος την έκβαση της μάχης;",
+      "title": "Θέμα: Επιρροή αρχαίας ελληνικής φιλοσοφίας στον Γρηγόριο Θεολόγο",
+      "description": "Υπόθεση: Γρηγόριος ο Θεολόγος και η έννοια της ειμαρμένης",
       "type": "evidence"
     },
     {
-      "title": "Παρουσίαση Πηγών",
-      "description": "Βασικά τεκμήρια και χάρτες από την κεντρική παρουσίαση του μαθήματος.",
-      "type": "note",
-      "linkUrl": "https://docs.google.com/presentation/d/..."
+      "title": "Επιχειρήματα:",
+      "description": "Α) Θύραθεν παιδεία, σπουδές του Γρηγορίου στην Αθήνα",
+      "type": "evidence"
     },
     {
-      "title": "Περσική Επεκτατικότητα",
-      "description": "Πιθανό αίτιο: Η επιθυμία της Περσίας για κυριαρχία στο Αιγαίο. (Προς διερεύνηση από την ομάδα)",
-      "type": "suspect"
+      "title": "Β) Αττική διάλεκτος στα έργα του, https://i.ibb.co/whxMWVRt/1771909017624.png",
+      "description": "",
+      "type": "evidence"
+    },
+    {
+      "title": "Γ) Λάτρης των ελληνικών γραμμάτων.",
+      "description": "",
+      "type": "evidence"
+    },
+    {
+      "title": "Στοά, https://i.ibb.co/gM2KghNQ/Screen-Shot-2026-03-03-at-11-54-35.png",
+      "description": "",
+      "type": "evidence"
+    },
+    {
+      "title": "Γρηγόριος ο Θεολόγος, https://i.ibb.co/S4sF9Drs/Screen-Shot-2026-03-07-at-11-38-15.png",
+      "description": "https://i.ibb.co/spWZ5Xn8/Screen-Shot-2026-03-07-at-11-35-40.png",
+      "type": "evidence"
     }
   ]
 }
