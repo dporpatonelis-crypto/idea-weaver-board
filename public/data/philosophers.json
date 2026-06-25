@@ -1,0 +1,11 @@
+{
+  "topic": "Αρχαία Ελληνική Φιλοσοφία",
+  "clues": [
+    { "title": "Πλάτων", "description": "Θεωρία των Ιδεών, η Πολιτεία, η Ανάμνηση", "type": "suspect", "imageUrl": "plato" },
+    { "title": "Αριστοτέλης", "description": "Μαθητής του Πλάτωνα, εμπειρισμός", "type": "suspect", "imageUrl": "aristotle" },
+    { "title": "Σωκράτης", "description": "Η μαιευτική μέθοδος, «Εν οίδα ότι ουδέν οίδα»", "type": "suspect", "imageUrl": "socrates" },
+    { "title": "Η Ανάμνηση", "description": "Η ψυχή γνωρίζει ήδη τις αλήθειες πριν τη γέννηση", "type": "evidence" },
+    { "title": "Η Προϋπαρξη", "description": "Η ψυχή υπάρχει πριν το σώμα", "type": "evidence" },
+    { "title": "Σημείωση", "description": "Ελέγξτε τη σύνδεση μεταξύ ανάμνησης και μαιευτικής", "type": "note" }
+  ]
+}
