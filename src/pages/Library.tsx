@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, BookOpen, RefreshCw, FileJson } from 'lucide-react';
+import { ArrowLeft, BookOpen, RefreshCw, FileJson, Download, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface DatasetEntry {
@@ -9,53 +9,75 @@ interface DatasetEntry {
   name: string;
   description?: string;
   file: string;
-}
-
-interface Manifest {
-  datasets: DatasetEntry[];
+  data: any;
+  source: 'bundled' | 'saved';
 }
 
 const LIBRARY_STORAGE_KEY = 'board:library-dataset';
+const SAVED_LIBRARY_KEY = 'board:library-saved';
+
+// Auto-discover JSON files dropped in src/data/library/ — no index needed.
+const bundledModules = import.meta.glob('@/data/library/*.json', { eager: true }) as Record<string, any>;
+
+function readSaved(): DatasetEntry[] {
+  try {
+    const raw = localStorage.getItem(SAVED_LIBRARY_KEY);
+    if (!raw) return [];
+    const arr = JSON.parse(raw);
+    return Array.isArray(arr) ? arr : [];
+  } catch {
+    return [];
+  }
+}
 
 export default function Library() {
   const navigate = useNavigate();
-  const [manifest, setManifest] = useState<Manifest | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [savedEntries, setSavedEntries] = useState<DatasetEntry[]>([]);
 
-  const loadManifest = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await fetch(`/data/index.json?t=${Date.now()}`);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = (await res.json()) as Manifest;
-      setManifest(data);
-    } catch (e: any) {
-      setError(e?.message || 'Σφάλμα φόρτωσης');
-    } finally {
-      setLoading(false);
-    }
-  };
+  useEffect(() => { setSavedEntries(readSaved()); }, []);
 
-  useEffect(() => {
-    loadManifest();
+  const bundledEntries: DatasetEntry[] = useMemo(() => {
+    return Object.entries(bundledModules).map(([path, mod]) => {
+      const file = path.split('/').pop() || path;
+      const data = (mod as any).default ?? mod;
+      const name = data?.topic || file.replace(/\.json$/, '');
+      return {
+        id: `bundled:${file}`,
+        name,
+        description: data?.clues?.length ? `${data.clues.length} στοιχεία` : undefined,
+        file,
+        data,
+        source: 'bundled' as const,
+      };
+    }).sort((a, b) => a.name.localeCompare(b.name, 'el'));
   }, []);
 
-  const handleLoad = async (entry: DatasetEntry) => {
-    try {
-      const res = await fetch(`/data/${entry.file}?t=${Date.now()}`);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      sessionStorage.setItem(
-        LIBRARY_STORAGE_KEY,
-        JSON.stringify({ entry, data, loadedAt: Date.now() })
-      );
-      toast.success(`Φορτώθηκε: ${entry.name}`);
-      navigate('/');
-    } catch (e: any) {
-      toast.error(`Αποτυχία φόρτωσης: ${e?.message || 'σφάλμα'}`);
-    }
+  const allEntries = [...savedEntries, ...bundledEntries];
+
+  const handleLoad = (entry: DatasetEntry) => {
+    sessionStorage.setItem(
+      LIBRARY_STORAGE_KEY,
+      JSON.stringify({ entry: { id: entry.id, name: entry.name, file: entry.file }, data: entry.data, loadedAt: Date.now() })
+    );
+    toast.success(`Φορτώθηκε: ${entry.name}`);
+    navigate('/');
+  };
+
+  const handleDownload = (entry: DatasetEntry) => {
+    const blob = new Blob([JSON.stringify(entry.data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = entry.file;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handleDeleteSaved = (id: string) => {
+    const next = savedEntries.filter(e => e.id !== id);
+    localStorage.setItem(SAVED_LIBRARY_KEY, JSON.stringify(next));
+    setSavedEntries(next);
+    toast.success('Διαγράφηκε');
   };
 
   const handleRestoreSync = () => {
@@ -110,60 +132,60 @@ export default function Library() {
         </div>
 
         {/* List */}
-        {loading && (
-          <p className="text-muted-foreground text-center py-12">Φόρτωση...</p>
-        )}
-
-        {error && (
-          <div className="p-4 rounded border border-destructive/40 bg-destructive/10 text-destructive text-sm">
-            Σφάλμα: {error}
-          </div>
-        )}
-
-        {manifest && !loading && (
-          <div className="grid gap-3">
-            {manifest.datasets.length === 0 && (
-              <p className="text-muted-foreground text-center py-12">
-                Η βιβλιοθήκη είναι άδεια. Πρόσθεσε JSON αρχεία στο{' '}
-                <code>public/data/</code> και ενημέρωσε το{' '}
-                <code>public/data/index.json</code>.
-              </p>
-            )}
-            {manifest.datasets.map((entry) => (
-              <button
-                key={entry.id}
-                onClick={() => handleLoad(entry)}
-                className="text-left p-4 rounded-md border border-border bg-card/5 hover:bg-card/10 hover:border-accent transition-colors group"
-              >
-                <div className="flex items-start gap-3">
-                  <FileJson className="text-accent shrink-0 mt-0.5 group-hover:scale-110 transition-transform" size={20} />
-                  <div className="flex-1 min-w-0">
-                    <h3
-                      className="text-foreground font-semibold mb-0.5"
-                      style={{ fontFamily: "'Playfair Display', serif" }}
-                    >
+        <div className="grid gap-3">
+          {allEntries.length === 0 && (
+            <p className="text-muted-foreground text-center py-12">
+              Η βιβλιοθήκη είναι άδεια. Πρόσθεσε JSON αρχεία στο{' '}
+              <code>src/data/library/</code> ή αποθήκευσε ένα live μάθημα από τον πίνακα.
+            </p>
+          )}
+          {allEntries.map((entry) => (
+            <div
+              key={entry.id}
+              className="flex items-start gap-2 p-4 rounded-md border border-border bg-card/5 hover:bg-card/10 hover:border-accent transition-colors group"
+            >
+              <button onClick={() => handleLoad(entry)} className="flex items-start gap-3 flex-1 text-left min-w-0">
+                <FileJson className="text-accent shrink-0 mt-0.5 group-hover:scale-110 transition-transform" size={20} />
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-foreground font-semibold" style={{ fontFamily: "'Playfair Display', serif" }}>
                       {entry.name}
                     </h3>
-                    {entry.description && (
-                      <p className="text-sm text-muted-foreground">{entry.description}</p>
-                    )}
-                    <p className="text-[10px] text-muted-foreground/60 mt-1 font-mono">
-                      {entry.file}
-                    </p>
+                    <span className={`text-[9px] px-1.5 py-0.5 rounded uppercase tracking-wider ${
+                      entry.source === 'saved'
+                        ? 'bg-string-agreement/20 text-string-agreement'
+                        : 'bg-muted text-muted-foreground'
+                    }`}>
+                      {entry.source === 'saved' ? 'Αποθηκευμένο' : 'Bundled'}
+                    </span>
                   </div>
+                  {entry.description && (
+                    <p className="text-sm text-muted-foreground mt-0.5">{entry.description}</p>
+                  )}
+                  <p className="text-[10px] text-muted-foreground/60 mt-1 font-mono">{entry.file}</p>
                 </div>
               </button>
-            ))}
-          </div>
-        )}
+              <div className="flex flex-col gap-1 shrink-0">
+                <Button size="sm" variant="ghost" onClick={() => handleDownload(entry)} title="Λήψη JSON" className="h-8 w-8 p-0">
+                  <Download size={14} />
+                </Button>
+                {entry.source === 'saved' && (
+                  <Button size="sm" variant="ghost" onClick={() => handleDeleteSaved(entry.id)} title="Διαγραφή" className="h-8 w-8 p-0 text-destructive hover:text-destructive">
+                    <Trash2 size={14} />
+                  </Button>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
 
         {/* Instructions */}
         <div className="mt-10 p-4 rounded-md border border-border/50 bg-secondary/30">
           <h4 className="text-sm font-bold text-foreground mb-2">📂 Πώς να προσθέσεις αρχεία</h4>
           <ol className="text-xs text-muted-foreground space-y-1 list-decimal list-inside">
-            <li>Δημιούργησε ένα <code>.json</code> αρχείο στο <code>public/data/</code></li>
-            <li>Πρόσθεσέ το στο <code>public/data/index.json</code> ως νέο entry</li>
-            <li>Push στο GitHub — εμφανίζεται αυτόματα εδώ</li>
+            <li><b>Μόνιμα:</b> ρίξε ένα <code>.json</code> αρχείο στο <code>src/data/library/</code> — εμφανίζεται αυτόματα χωρίς index</li>
+            <li><b>Από live μάθημα:</b> στον πίνακα πάτα «💾 Αποθήκευση στη Βιβλιοθήκη» για να σώσεις το τρέχον μάθημα στον browser</li>
+            <li>Με το κουμπί <Download size={10} className="inline" /> μπορείς να κατεβάσεις οποιοδήποτε αρχείο και να το βάλεις στον φάκελο για μόνιμη αρχειοθέτηση</li>
           </ol>
         </div>
       </div>

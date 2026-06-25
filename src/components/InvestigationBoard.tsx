@@ -4,7 +4,7 @@ import BoardCardComponent from './BoardCardComponent';
 import ConnectionLines from './ConnectionLines';
 import AddCardDialog from './AddCardDialog';
 import ConnectionDialog from './ConnectionDialog';
-import { Plus, BookOpen } from 'lucide-react';
+import { Plus, BookOpen, Save } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
@@ -22,6 +22,7 @@ const imageMap: Record<string, string> = {
 };
 
 const LIBRARY_STORAGE_KEY = 'board:library-dataset';
+const SAVED_LIBRARY_KEY = 'board:library-saved';
 
 function readLibraryOverride(): { topic?: string; clues: any[] } | null {
   try {
@@ -166,6 +167,32 @@ export default function InvestigationBoard() {
     });
   }, []);
 
+  const handleSaveToLibrary = useCallback(() => {
+    const defaultName = (cluesData as any)?.topic || 'Μάθημα';
+    const name = window.prompt('Όνομα για αποθήκευση στη βιβλιοθήκη:', defaultName);
+    if (!name) return;
+    // Snapshot from current source (library override or live slides sync)
+    const source: any = readLibraryOverride() ?? cluesData;
+    const data = { topic: name, clues: source?.clues ?? [] };
+    const file = `${name.replace(/[^\p{L}\p{N}]+/gu, '-').toLowerCase()}-${Date.now()}.json`;
+    try {
+      const raw = localStorage.getItem(SAVED_LIBRARY_KEY);
+      const arr = raw ? JSON.parse(raw) : [];
+      arr.unshift({
+        id: `saved:${Date.now()}`,
+        name,
+        description: `${data.clues.length} στοιχεία · αποθηκεύτηκε ${new Date().toLocaleDateString('el-GR')}`,
+        file,
+        data,
+        source: 'saved',
+      });
+      localStorage.setItem(SAVED_LIBRARY_KEY, JSON.stringify(arr));
+      toast.success(`Αποθηκεύτηκε στη βιβλιοθήκη: ${name}`);
+    } catch (e: any) {
+      toast.error(`Αποτυχία αποθήκευσης: ${e?.message || 'σφάλμα'}`);
+    }
+  }, []);
+
   return (
     <div className="w-screen h-screen flex flex-col bg-background overflow-hidden">
       {/* Header */}
@@ -182,6 +209,10 @@ export default function InvestigationBoard() {
           <Button onClick={() => setShowAddDialog(true)} size="sm" className="gap-1.5">
             <Plus size={14} />
             Νέο Στοιχείο
+          </Button>
+          <Button onClick={handleSaveToLibrary} size="sm" variant="outline" className="gap-1.5">
+            <Save size={14} />
+            Αποθήκευση
           </Button>
           <Button onClick={() => navigate('/library')} size="sm" variant="secondary" className="gap-1.5">
             <BookOpen size={14} />
