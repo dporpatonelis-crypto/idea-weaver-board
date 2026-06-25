@@ -4,7 +4,7 @@ import BoardCardComponent from './BoardCardComponent';
 import ConnectionLines from './ConnectionLines';
 import AddCardDialog from './AddCardDialog';
 import ConnectionDialog from './ConnectionDialog';
-import { Plus, ScrollText } from 'lucide-react';
+import { Plus, ScrollText, BookOpen } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
@@ -20,6 +20,20 @@ const imageMap: Record<string, string> = {
   aristotle: aristotleImg,
   socrates: socratesImg,
 };
+
+const LIBRARY_STORAGE_KEY = 'board:library-dataset';
+
+function readLibraryOverride(): { topic?: string; clues: any[] } | null {
+  try {
+    const raw = sessionStorage.getItem(LIBRARY_STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (parsed?.data?.clues?.length) return parsed.data;
+    return null;
+  } catch {
+    return null;
+  }
+}
 
 const fallbackCards: BoardCard[] = [
   { id: '1', title: 'Πλάτων', description: 'Θεωρία των Ιδεών, η Πολιτεία, η Ανάμνηση', type: 'suspect', imageUrl: platoImg, x: 80, y: 60, rotation: -2 },
@@ -40,16 +54,20 @@ function extractImageUrl(text: string): { text: string; imageUrl?: string } {
 
 function buildCardsFromClues(): BoardCard[] {
   try {
-    if (!cluesData?.clues?.length) return fallbackCards;
+    // 1. Library override (sessionStorage) — does NOT touch the slides sync target
+    const override = readLibraryOverride();
+    const source: any = override ?? cluesData;
+    if (!source?.clues?.length) return fallbackCards;
     const positions = [
       { x: 80, y: 60 }, { x: 400, y: 80 }, { x: 700, y: 60 },
       { x: 150, y: 280 }, { x: 500, y: 300 }, { x: 350, y: 180 },
     ];
-    return cluesData.clues.map((clue, i) => {
+    return source.clues.map((clue: any, i: number) => {
       const { text: descText, imageUrl: descImage } = extractImageUrl(clue.description || '');
       const { text: titleText, imageUrl: titleImage } = extractImageUrl(clue.title || '');
-      const resolvedImage = (clue as any).imageUrl
-        ? (imageMap[(clue as any).imageUrl] || (clue as any).imageUrl)
+      const rawImage = clue.imageUrl || clue.image;
+      const resolvedImage = rawImage
+        ? (imageMap[rawImage] || rawImage)
         : (descImage || titleImage);
       return {
         id: `clue-${i + 1}`,
