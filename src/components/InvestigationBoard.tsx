@@ -187,6 +187,10 @@ export default function InvestigationBoard() {
             <ScrollText size={14} />
             Συμπέρασμα
           </Button>
+          <Button onClick={() => navigate('/library')} size="sm" variant="secondary" className="gap-1.5">
+            <BookOpen size={14} />
+            Βιβλιοθήκη
+          </Button>
         </div>
       </header>
 
