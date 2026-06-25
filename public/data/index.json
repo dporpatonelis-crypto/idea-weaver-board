@@ -1,0 +1,16 @@
+{
+  "datasets": [
+    {
+      "id": "philosophers",
+      "name": "Αρχαία Ελληνική Φιλοσοφία",
+      "description": "Πλάτων, Αριστοτέλης, Σωκράτης και η εξέλιξη της σκέψης",
+      "file": "philosophers.json"
+    },
+    {
+      "id": "french-revolution",
+      "name": "Γαλλική Επανάσταση (παράδειγμα)",
+      "description": "Αιτίες, αφορμές και συνέπειες — ιστορικό θέμα",
+      "file": "french-revolution.json"
+    }
+  ]
+}
