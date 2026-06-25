@@ -4,7 +4,7 @@ import BoardCardComponent from './BoardCardComponent';
 import ConnectionLines from './ConnectionLines';
 import AddCardDialog from './AddCardDialog';
 import ConnectionDialog from './ConnectionDialog';
-import { Plus, ScrollText, BookOpen } from 'lucide-react';
+import { Plus, BookOpen } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
@@ -182,10 +182,6 @@ export default function InvestigationBoard() {
           <Button onClick={() => setShowAddDialog(true)} size="sm" className="gap-1.5">
             <Plus size={14} />
             Νέο Στοιχείο
-          </Button>
-          <Button onClick={() => navigate('/conclusion')} size="sm" variant="secondary" className="gap-1.5">
-            <ScrollText size={14} />
-            Συμπέρασμα
           </Button>
           <Button onClick={() => navigate('/library')} size="sm" variant="secondary" className="gap-1.5">
             <BookOpen size={14} />
