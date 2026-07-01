@@ -1,0 +1,120 @@
+{
+  "title": "The Interpretive Network of Authority",
+  "description": "Investigation of the relationship between apostolic discourse and political reality.",
+  "groups": [
+    {
+      "id": "r1",
+      "name": "The Hall of Opening",
+      "theme": "Missionary Power",
+      "clues": [
+        "cp1",
+        "cp2",
+        "cp3"
+      ]
+    },
+    {
+      "id": "r2",
+      "name": "The Court of Authority",
+      "theme": "Political Theology",
+      "clues": [
+        "cp4",
+        "cp5",
+        "cp6"
+      ]
+    },
+    {
+      "id": "r3",
+      "name": "The Upper Room of Kenosis",
+      "theme": "Ascetic Theology",
+      "clues": [
+        "cp7",
+        "cp8",
+        "cp9"
+      ]
+    },
+    {
+      "id": "r4",
+      "name": "The Prison of the Spirit",
+      "theme": "Martyrdom and Parrhesia",
+      "clues": [
+        "cp10",
+        "cp11",
+        "cp12"
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "cp1",
+      "title": "Opening to the Nations",
+      "content": "Abolition of the Law's walls and preaching of the 'unsearchable riches of Christ'",
+      "type": "theological-shift"
+    },
+    {
+      "id": "cp2",
+      "title": "The Church as Body",
+      "content": "Continuous journey through persecutions so the Church becomes Christ's Body throughout the oikoumene",
+      "type": "ecclesiology"
+    },
+    {
+      "id": "cp3",
+      "title": "Rhetoric as Servant",
+      "content": "Chrysostom's golden tongue gives voice to Paul's epistles in the cities, turning theory into life",
+      "type": "methodology"
+    },
+    {
+      "id": "cp4",
+      "title": "Order and Authority",
+      "content": "Authority under God as means to ensure social cohesion without destroying society",
+      "type": "political-theology"
+    },
+    {
+      "id": "cp5",
+      "title": "The Metaphor of the Ties",
+      "content": "Authority as instrument of God's goodness to avoid anarchy, like the ties (supports) of a house",
+      "type": "analogy"
+    },
+    {
+      "id": "cp6",
+      "title": "Pedagogical Fear",
+      "content": "Fear of rulers functions pedagogically to maintain spiritual vigilance in times of stability",
+      "type": "pastoral-strategy"
+    },
+    {
+      "id": "cp7",
+      "title": "Kenosis and Humility",
+      "content": "Rejection of all human glory through Christ's mindset who humbled himself",
+      "type": "christology"
+    },
+    {
+      "id": "cp8",
+      "title": "Resistance to Worldly Power",
+      "content": "Kenosis as model for the bishop's stance against imperial court claims",
+      "type": "resistance"
+    },
+    {
+      "id": "cp9",
+      "title": "True Authority",
+      "content": "True authority belongs to Christ; salvation is not in decrees but in participatory experience",
+      "type": "dogmatic-truth"
+    },
+    {
+      "id": "cp10",
+      "title": "Insidious Persecution",
+      "content": "Persecution in Christian empire is more dangerous as it comes from those who bear Christ's name",
+      "type": "historical-insight"
+    },
+    {
+      "id": "cp11",
+      "title": "Political Expediency",
+      "content": "Church stability often becomes a trap for the state to legislate on matters of faith",
+      "type": "risk-factor"
+    },
+    {
+      "id": "cp12",
+      "title": "Prophetic Correction",
+      "content": "Chrysostom as 'New Paul' and 'John the Forerunner' corrects the moral decay of the court with parrhesia",
+      "type": "leadership-model"
+    }
+  ]
+}
