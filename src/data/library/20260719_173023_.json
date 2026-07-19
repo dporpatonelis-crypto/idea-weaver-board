@@ -1,0 +1,136 @@
+{
+  "nodes": [
+    {
+      "id": "n1",
+      "label": "Απόστολος Παύλος",
+      "type": "person",
+      "description": "Απόστολος των Εθνών, κήρυκας του Ευαγγελίου εν μέσω διωγμών.",
+      "image": "https://i.ibb.co/4ZmrLG2J/1775331843223.png"
+    },
+    {
+      "id": "n2",
+      "label": "Ιωάννης Χρυσόστομος",
+      "type": "person",
+      "description": "Αρχιεπίσκοπος, μέγας ρήτορας, ερμηνευτής των επιστολών του Παύλου.",
+      "image": "https://i.ibb.co/8n5GgsCV/Two-Millennia-of-Church-History-pptx.jpg"
+    },
+    {
+      "id": "n3",
+      "label": "Ανεξιχνίαστος Πλούτος του Χριστού",
+      "type": "concept",
+      "description": "Το κήρυγμα του Ευαγγελίου στα Έθνη, πέρα από τα τείχη του Νόμου.",
+      "image": "https://i.ibb.co/k28pSzCJ/Digital-Knowledge-Archaeology-pptx-5.jpg"
+    },
+    {
+      "id": "n4",
+      "label": "Εξουσία (Ρωμ. 13)",
+      "type": "concept",
+      "description": "'Ουκ έστιν εξουσία ει μη υπό Θεού' — η πολιτική εξουσία ως όργανο θείας τάξης.",
+      "image": "https://i.ibb.co/8n5GgsCV/Two-Millennia-of-Church-History-pptx.jpg"
+    },
+    {
+      "id": "n5",
+      "label": "Κένωση / Ταπείνωση (Φιλ. 2)",
+      "type": "concept",
+      "description": "Η αυτοταπείνωση του Λόγου 'μέχρι θανάτου σταυρού' ως πρότυπο φρονήματος.",
+      "image": "https://i.ibb.co/nMwjVrmC/The-Sacred-Blueprint-page-0001.jpg"
+    },
+    {
+      "id": "n6",
+      "label": "Ρητορική Δεινότητα",
+      "type": "concept",
+      "description": "Η 'χρυσή' γλώσσα του Χρυσοστόμου στην υπηρεσία του αποστολικού κηρύγματος.",
+      "image": "https://i.ibb.co/cXsZqTDS/Screenshot-2026-05-09-13-31-02-474-com-android-chrome-edit.jpg"
+    },
+    {
+      "id": "n7",
+      "label": "Διωγμός",
+      "type": "concept",
+      "description": "Ο διωγμός της αποστολικής εποχής εναντίον μιας νεοσύστατης πίστης.",
+      "image": "https://i.ibb.co/8n5GgsCV/Two-Millennia-of-Church-History-pptx.jpg"
+    },
+    {
+      "id": "n8",
+      "label": "Αυτοκρατορική Επιρροή",
+      "type": "concept",
+      "description": "Ο κίνδυνος αλλοίωσης της πίστης από την κοσμική εξουσία σε μια χριστιανική πλέον αυτοκρατορία.",
+      "image": "https://i.ibb.co/8n5GgsCV/Two-Millennia-of-Church-History-pptx.jpg"
+    },
+    {
+      "id": "n9",
+      "label": "Παρρησία",
+      "type": "concept",
+      "description": "Η ελεύθερη και τολμηρή ομιλία ενώπιον της εξουσίας.",
+      "image": "https://i.ibb.co/cXsZqTDS/Screenshot-2026-05-09-13-31-02-474-com-android-chrome-edit.jpg"
+    },
+    {
+      "id": "n10",
+      "label": "Ανδριάντες Αντιοχείας",
+      "type": "event",
+      "description": "Η στάση των πολιτών της Αντιόχειας το 387 μ.Χ. και η ποιμαντική απάντηση του Χρυσοστόμου.",
+      "image": "https://i.ibb.co/8n5GgsCV/Two-Millennia-of-Church-History-pptx.jpg"
+    }
+  ],
+  "edges": [
+    {
+      "source": "n1",
+      "target": "n3",
+      "label": "κηρύττει"
+    },
+    {
+      "source": "n2",
+      "target": "n6",
+      "label": "χρησιμοποιεί"
+    },
+    {
+      "source": "n6",
+      "target": "n1",
+      "label": "δίνει φωνή σε"
+    },
+    {
+      "source": "n1",
+      "target": "n4",
+      "label": "διδάσκει"
+    },
+    {
+      "source": "n2",
+      "target": "n4",
+      "label": "ερμηνεύει"
+    },
+    {
+      "source": "n2",
+      "target": "n10",
+      "label": "εφαρμόζει σε"
+    },
+    {
+      "source": "n1",
+      "target": "n5",
+      "label": "διδάσκει"
+    },
+    {
+      "source": "n2",
+      "target": "n5",
+      "label": "ερμηνεύει ενάντια σε"
+    },
+    {
+      "source": "n2",
+      "target": "n8",
+      "label": "αντιμετωπίζει"
+    },
+    {
+      "source": "n1",
+      "target": "n7",
+      "label": "υφίσταται"
+    },
+    {
+      "source": "n9",
+      "target": "n1",
+      "label": "πηγάζει από"
+    },
+    {
+      "source": "n2",
+      "target": "n9",
+      "label": "επικαλείται"
+    }
+  ]
+}
