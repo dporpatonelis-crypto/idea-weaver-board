@@ -61,39 +61,49 @@ export default function BoardCardComponent({
     };
   }, [isFlipped, card.id, onUnflip]);
 
-  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+  const handlePointerDown = useCallback((e: React.PointerEvent) => {
     if ((e.target as HTMLElement).closest('.no-drag')) return;
     e.preventDefault();
+    e.stopPropagation();
     dragging.current = true;
     setIsDragging(true);
     offset.current = { x: e.clientX - card.x, y: e.clientY - card.y };
 
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!dragging.current) return;
-      onMove(card.id, e.clientX - offset.current.x, e.clientY - offset.current.y);
+    const target = e.currentTarget as HTMLElement;
+    try { target.setPointerCapture(e.pointerId); } catch { /* noop */ }
+
+    const handlePointerMove = (ev: PointerEvent) => {
+      if (!dragging.current || ev.pointerId !== e.pointerId) return;
+      ev.preventDefault();
+      onMove(card.id, ev.clientX - offset.current.x, ev.clientY - offset.current.y);
     };
-    const handleMouseUp = () => {
+    const handlePointerUp = (ev: PointerEvent) => {
+      if (ev.pointerId !== e.pointerId) return;
       dragging.current = false;
       setIsDragging(false);
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
+      try { target.releasePointerCapture(e.pointerId); } catch { /* noop */ }
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('pointerup', handlePointerUp);
+      window.removeEventListener('pointercancel', handlePointerUp);
     };
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseup', handleMouseUp);
+    window.addEventListener('pointermove', handlePointerMove, { passive: false });
+    window.addEventListener('pointerup', handlePointerUp);
+    window.addEventListener('pointercancel', handlePointerUp);
   }, [card.id, card.x, card.y, onMove]);
 
   const pinColor = pinColors[card.id.charCodeAt(0) % 2];
 
   return (
     <div
-      className={`absolute select-none transition-shadow duration-200 flip-container ${isDragging ? 'z-50 scale-105' : 'z-10'} ${isSelected ? 'ring-2 ring-accent ring-offset-2 ring-offset-cork' : ''}`}
+      className={`absolute select-none touch-none transition-shadow duration-200 flip-container ${isDragging ? 'z-50 scale-105' : 'z-10'} ${isSelected ? 'ring-2 ring-accent ring-offset-2 ring-offset-cork' : ''}`}
       style={{
         left: card.x,
         top: card.y,
         transform: `rotate(${card.rotation}deg)`,
         width: card.type === 'note' ? 160 : 180,
+        touchAction: 'none',
       }}
-      onMouseDown={handleMouseDown}
+      onPointerDown={handlePointerDown}
       onClick={() => onSelect(card.id)}
     >
       {/* Pin */}
@@ -146,7 +156,7 @@ export default function BoardCardComponent({
 
             {/* Description */}
             {card.description && (
-              <p className="text-xs text-card-foreground/70 mt-1 leading-snug" style={{ fontFamily: "'Crimson Text', serif" }}>
+              <p className="text-xs text-card-foreground/70 mt-1 leading-snug overflow-hidden" style={{ fontFamily: "'Crimson Text', serif", maxHeight: 200 }}>
                 {card.description}
               </p>
             )}
