@@ -156,7 +156,7 @@ export default function BoardCardComponent({
 
             {/* Description */}
             {card.description && (
-              <p className="text-xs text-card-foreground/70 mt-1 leading-snug overflow-y-auto no-drag" style={{ fontFamily: "'Crimson Text', serif", maxHeight: 180 }}>
+              <p className="text-xs text-card-foreground/70 mt-1 leading-snug overflow-hidden" style={{ fontFamily: "'Crimson Text', serif", maxHeight: 200 }}>
                 {card.description}
               </p>
             )}
