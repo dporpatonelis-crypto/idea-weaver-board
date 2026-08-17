@@ -59,10 +59,10 @@ function buildCardsFromClues(): BoardCard[] {
     const override = readLibraryOverride();
     const source: any = override ?? cluesData;
     if (!source?.clues?.length) return fallbackCards;
-    const positions = [
-      { x: 80, y: 60 }, { x: 400, y: 80 }, { x: 700, y: 60 },
-      { x: 150, y: 280 }, { x: 500, y: 300 }, { x: 350, y: 180 },
-    ];
+    // Grid layout with generous spacing so long cards never overlap
+    const COL_W = 240;
+    const ROW_H = 340;
+    const COLS = Math.max(2, Math.floor(((typeof window !== 'undefined' ? window.innerWidth : 1200) - 80) / COL_W));
     return source.clues.map((clue: any, i: number) => {
       const { text: descText, imageUrl: descImage } = extractImageUrl(clue.description || '');
       const { text: titleText, imageUrl: titleImage } = extractImageUrl(clue.title || '');
@@ -76,8 +76,8 @@ function buildCardsFromClues(): BoardCard[] {
         description: descText,
         type: (clue.type as BoardCard['type']) || 'evidence',
         imageUrl: resolvedImage,
-        x: positions[i % positions.length].x + (i >= positions.length ? 50 * Math.floor(i / positions.length) : 0),
-        y: positions[i % positions.length].y + (i >= positions.length ? 50 * Math.floor(i / positions.length) : 0),
+        x: 40 + (i % COLS) * COL_W,
+        y: 40 + Math.floor(i / COLS) * ROW_H,
         rotation: (Math.random() - 0.5) * 8,
       };
     });
