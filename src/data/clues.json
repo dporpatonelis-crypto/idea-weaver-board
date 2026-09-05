@@ -2,122 +2,27 @@
   "topic": "Lovable 1st slide dynamic Template",
   "clues": [
     {
-      "title": "ΧΡΟΝΟΛΟΓΙΟ  /  ΠΕΝΤΕ ΣΤΑΘΜΟΙ",
+      "title": "ΣΥΓΚΡΙΝΩ • ΣΥΝΘΕΤΩ",
       "description": "",
       "type": "evidence"
     },
     {
-      "title": "[Τίτλος μαθήματος]",
+      "title": "ΠΛΕΥΡΑ Α",
+      "description": "[Όνομα / πρόσωπο], • [τεκμήριο ή επιχείρημα], • [τεκμήριο ή επιχείρημα], • [τεκμήριο ή επιχείρημα]",
+      "type": "evidence"
+    },
+    {
+      "title": "ΠΛΕΥΡΑ Β",
+      "description": "[Όνομα / πρόσωπο], • [τεκμήριο ή επιχείρημα], • [τεκμήριο ή επιχείρημα], • [τεκμήριο ή επιχείρημα]",
+      "type": "evidence"
+    },
+    {
+      "title": "[Κεντρικό ερώτημα / σύνθεση]",
       "description": "",
       "type": "evidence"
     },
     {
-      "title": "[Το ερώτημα που συνδέει τα γεγονότα]",
-      "description": "",
-      "type": "evidence"
-    },
-    {
-      "title": "[Έτος]",
-      "description": "",
-      "type": "evidence"
-    },
-    {
-      "title": "ΣΤΑΘΜΟΣ 1",
-      "description": "",
-      "type": "evidence"
-    },
-    {
-      "title": "[Γεγονός]",
-      "description": "",
-      "type": "evidence"
-    },
-    {
-      "title": "[Τι συνέβη;",
-      "description": "Γιατί έχει σημασία;]",
-      "type": "evidence"
-    },
-    {
-      "title": "[Έτος]",
-      "description": "",
-      "type": "evidence"
-    },
-    {
-      "title": "ΣΤΑΘΜΟΣ 2",
-      "description": "",
-      "type": "evidence"
-    },
-    {
-      "title": "[Γεγονός]",
-      "description": "",
-      "type": "evidence"
-    },
-    {
-      "title": "[Τι συνέβη;",
-      "description": "Γιατί έχει σημασία;]",
-      "type": "evidence"
-    },
-    {
-      "title": "[Έτος]",
-      "description": "",
-      "type": "evidence"
-    },
-    {
-      "title": "ΣΤΑΘΜΟΣ 3",
-      "description": "",
-      "type": "evidence"
-    },
-    {
-      "title": "[Γεγονός]",
-      "description": "",
-      "type": "evidence"
-    },
-    {
-      "title": "[Τι συνέβη;",
-      "description": "Γιατί έχει σημασία;]",
-      "type": "evidence"
-    },
-    {
-      "title": "[Έτος]",
-      "description": "",
-      "type": "evidence"
-    },
-    {
-      "title": "ΣΤΑΘΜΟΣ 4",
-      "description": "",
-      "type": "evidence"
-    },
-    {
-      "title": "[Γεγονός]",
-      "description": "",
-      "type": "evidence"
-    },
-    {
-      "title": "[Τι συνέβη;",
-      "description": "Γιατί έχει σημασία;]",
-      "type": "evidence"
-    },
-    {
-      "title": "[Έτος]",
-      "description": "",
-      "type": "evidence"
-    },
-    {
-      "title": "ΣΤΑΘΜΟΣ 5",
-      "description": "",
-      "type": "evidence"
-    },
-    {
-      "title": "[Γεγονός]",
-      "description": "",
-      "type": "evidence"
-    },
-    {
-      "title": "[Τι συνέβη;",
-      "description": "Γιατί έχει σημασία;]",
-      "type": "evidence"
-    },
-    {
-      "title": "[Τι αλλάζει από τον πρώτο στον τελευταίο σταθμό;]",
+      "title": "TEMPLATE 01",
       "description": "",
       "type": "evidence"
     }
