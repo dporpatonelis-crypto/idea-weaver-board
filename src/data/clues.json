@@ -2,27 +2,32 @@
   "topic": "Lovable 1st slide dynamic Template",
   "clues": [
     {
-      "title": "ΣΥΓΚΡΙΝΩ • ΣΥΝΘΕΤΩ",
+      "title": "ΤΟΙΧΟΣ ΕΡΕΥΝΑΣ",
       "description": "",
       "type": "evidence"
     },
     {
-      "title": "ΠΛΕΥΡΑ Α",
-      "description": "[Όνομα / πρόσωπο], • [τεκμήριο ή επιχείρημα], • [τεκμήριο ή επιχείρημα], • [τεκμήριο ή επιχείρημα]",
+      "title": "ΤΕΚΜΗΡΙΟ 1",
+      "description": "[τίτλος], [παρατήρηση / στοιχείο]",
       "type": "evidence"
     },
     {
-      "title": "ΠΛΕΥΡΑ Β",
-      "description": "[Όνομα / πρόσωπο], • [τεκμήριο ή επιχείρημα], • [τεκμήριο ή επιχείρημα], • [τεκμήριο ή επιχείρημα]",
+      "title": "ΤΕΚΜΗΡΙΟ 2",
+      "description": "[τίτλος], [παρατήρηση / στοιχείο]",
       "type": "evidence"
     },
     {
-      "title": "[Κεντρικό ερώτημα / σύνθεση]",
+      "title": "ΤΕΚΜΗΡΙΟ 3",
+      "description": "[τίτλος], [παρατήρηση / στοιχείο]",
+      "type": "evidence"
+    },
+    {
+      "title": "[Σχέση / υπόθεση που προκύπτει]",
       "description": "",
       "type": "evidence"
     },
     {
-      "title": "TEMPLATE 01",
+      "title": "TEMPLATE 02",
       "description": "",
       "type": "evidence"
     }
