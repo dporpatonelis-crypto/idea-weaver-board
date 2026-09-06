@@ -2,32 +2,72 @@
   "topic": "Lovable 1st slide dynamic Template",
   "clues": [
     {
-      "title": "ΤΟΙΧΟΣ ΕΡΕΥΝΑΣ",
+      "title": "Η ΔΙΚΗ ΜΑΣ ΣΥΜΒΟΛΗ",
       "description": "",
       "type": "evidence"
     },
     {
-      "title": "ΤΕΚΜΗΡΙΟ 1",
-      "description": "[τίτλος], [παρατήρηση / στοιχείο]",
-      "type": "evidence"
-    },
-    {
-      "title": "ΤΕΚΜΗΡΙΟ 2",
-      "description": "[τίτλος], [παρατήρηση / στοιχείο]",
-      "type": "evidence"
-    },
-    {
-      "title": "ΤΕΚΜΗΡΙΟ 3",
-      "description": "[τίτλος], [παρατήρηση / στοιχείο]",
-      "type": "evidence"
-    },
-    {
-      "title": "[Σχέση / υπόθεση που προκύπτει]",
+      "title": "Τι σημασία έχει για μας το κάθε γεγονός;",
       "description": "",
       "type": "evidence"
     },
     {
-      "title": "TEMPLATE 02",
+      "title": "Η ΣΗΜΑΣΙΑ ΤΟΥ ΚΑΘΕ ΓΕΓΟΝΟΤΟΣ",
+      "description": "",
+      "type": "evidence"
+    },
+    {
+      "title": "Γράψε με δικά σου λόγια τι μας δείχνει το κάθε γεγονός.",
+      "description": "",
+      "type": "evidence"
+    },
+    {
+      "title": "Γέννηση",
+      "description": "",
+      "type": "evidence"
+    },
+    {
+      "title": "Διδασκαλία",
+      "description": "",
+      "type": "evidence"
+    },
+    {
+      "title": "Θαύματα",
+      "description": "",
+      "type": "evidence"
+    },
+    {
+      "title": "Πάθος",
+      "description": "",
+      "type": "evidence"
+    },
+    {
+      "title": "Ανάσταση",
+      "description": "",
+      "type": "evidence"
+    },
+    {
+      "title": "Γράψε εδώ…",
+      "description": "",
+      "type": "evidence"
+    },
+    {
+      "title": "Γράψε εδώ…",
+      "description": "",
+      "type": "evidence"
+    },
+    {
+      "title": "Γράψε εδώ…",
+      "description": "",
+      "type": "evidence"
+    },
+    {
+      "title": "Γράψε εδώ…",
+      "description": "",
+      "type": "evidence"
+    },
+    {
+      "title": "Γράψε εδώ…",
       "description": "",
       "type": "evidence"
     }
