@@ -1,42 +1,43 @@
 {
-  "topic": "Επιρροή αρχαίας ελληνικής φιλοσοφίας στον Γρηγόριο Θεολόγο",
+  "topic": "Timeline Εκκλησιαστικής Ιστορίας",
   "clues": [
     {
-      "id": "active-slide-hypothesis",
-      "title": "Υπόθεση",
-      "description": "Γρηγόριος ο Θεολόγος και η έννοια της ειμαρμένης",
-      "type": "note"
-    },
-    {
-      "id": "active-slide-argument-a",
-      "title": "Επιχείρημα Α",
-      "description": "Θύραθεν παιδεία, σπουδές του Γρηγορίου στην Αθήνα",
+      "id": "timeline-station-1",
+      "title": "ΣΤΑΘΜΟΣ 1 — Α-Β΄ Οικουμενική",
+      "description": "",
       "type": "evidence"
     },
     {
-      "id": "active-slide-argument-b",
-      "title": "Επιχείρημα Β",
-      "description": "Αττική διάλεκτος στα έργα του,",
+      "id": "timeline-station-2",
+      "title": "ΣΤΑΘΜΟΣ 2 — Γ’-Στ' Χριστολογία",
+      "description": "",
       "type": "evidence"
     },
     {
-      "id": "active-slide-argument-c",
-      "title": "Επιχείρημα Γ",
-      "description": "Λάτρης των ελληνικών γραμμάτων.",
+      "id": "timeline-station-3",
+      "title": "ΣΤΑΘΜΟΣ 3 — Ζ' Οικουμενική",
+      "description": "",
       "type": "evidence"
     },
     {
-      "id": "active-slide-argument-d",
-      "title": "Επιχείρημα Δ",
-      "description": "Στοά,",
+      "id": "timeline-station-4",
+      "title": "ΣΤΑΘΜΟΣ 4 — Θέωση Συμεών-Παλαμάς",
+      "description": "",
+      "type": "evidence"
+    },
+    {
+      "id": "timeline-station-5",
+      "title": "ΣΤΑΘΜΟΣ 5 — Σχισμα Καθολικής - Μεταρρύθμιση",
+      "description": "",
       "type": "evidence"
     }
   ],
   "source": {
     "presentation_id": "1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw",
-    "revision_id": "9GWO-k8aF0NSbg",
+    "revision_id": "1dDLjKo3rzu_HQ",
     "slide_number": 1,
-    "slide_object_id": "g3cc98c32688_0_54",
-    "template_family": "argument-map"
+    "slide_object_id": "g3d30da613c4351e8_0",
+    "template_family": "timeline",
+    "context_question": "Σύνδεση δογματικής συνείδησης με τη πράξη της ζωής"
   }
 }
