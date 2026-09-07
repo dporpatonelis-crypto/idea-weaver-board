@@ -1,75 +1,42 @@
 {
-  "topic": "Lovable 1st slide dynamic Template",
+  "topic": "Επιρροή αρχαίας ελληνικής φιλοσοφίας στον Γρηγόριο Θεολόγο",
   "clues": [
     {
-      "title": "Η ΔΙΚΗ ΜΑΣ ΣΥΜΒΟΛΗ",
-      "description": "",
+      "id": "active-slide-hypothesis",
+      "title": "Υπόθεση",
+      "description": "Γρηγόριος ο Θεολόγος και η έννοια της ειμαρμένης",
+      "type": "note"
+    },
+    {
+      "id": "active-slide-argument-a",
+      "title": "Επιχείρημα Α",
+      "description": "Θύραθεν παιδεία, σπουδές του Γρηγορίου στην Αθήνα",
       "type": "evidence"
     },
     {
-      "title": "Τι σημασία έχει για μας το κάθε γεγονός;",
-      "description": "",
+      "id": "active-slide-argument-b",
+      "title": "Επιχείρημα Β",
+      "description": "Αττική διάλεκτος στα έργα του,",
       "type": "evidence"
     },
     {
-      "title": "Η ΣΗΜΑΣΙΑ ΤΟΥ ΚΑΘΕ ΓΕΓΟΝΟΤΟΣ",
-      "description": "",
+      "id": "active-slide-argument-c",
+      "title": "Επιχείρημα Γ",
+      "description": "Λάτρης των ελληνικών γραμμάτων.",
       "type": "evidence"
     },
     {
-      "title": "Γράψε με δικά σου λόγια τι μας δείχνει το κάθε γεγονός.",
-      "description": "",
-      "type": "evidence"
-    },
-    {
-      "title": "Γέννηση",
-      "description": "",
-      "type": "evidence"
-    },
-    {
-      "title": "Διδασκαλία",
-      "description": "",
-      "type": "evidence"
-    },
-    {
-      "title": "Θαύματα",
-      "description": "",
-      "type": "evidence"
-    },
-    {
-      "title": "Πάθος",
-      "description": "",
-      "type": "evidence"
-    },
-    {
-      "title": "Ανάσταση",
-      "description": "",
-      "type": "evidence"
-    },
-    {
-      "title": "Γράψε εδώ…",
-      "description": "",
-      "type": "evidence"
-    },
-    {
-      "title": "Γράψε εδώ…",
-      "description": "",
-      "type": "evidence"
-    },
-    {
-      "title": "Γράψε εδώ…",
-      "description": "",
-      "type": "evidence"
-    },
-    {
-      "title": "Γράψε εδώ…",
-      "description": "",
-      "type": "evidence"
-    },
-    {
-      "title": "Γράψε εδώ…",
-      "description": "",
+      "id": "active-slide-argument-d",
+      "title": "Επιχείρημα Δ",
+      "description": "Στοά,",
       "type": "evidence"
     }
-  ]
+  ],
+  "source": {
+    "presentation_id": "1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw",
+    "revision_id": "9GWO-k8aF0NSbg",
+    "slide_number": 1,
+    "slide_object_id": "g3cc98c32688_0_54",
+    "template_family": "argument-map"
+  }
 }
