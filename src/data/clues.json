@@ -1,43 +1,30 @@
 {
-  "topic": "Timeline Εκκλησιαστικής Ιστορίας",
+  "topic": "ΤΟΙΧΟΣ ΕΡΕΥΝΑΣ Test",
   "clues": [
     {
-      "id": "timeline-station-1",
-      "title": "ΣΤΑΘΜΟΣ 1 — Α-Β΄ Οικουμενική",
-      "description": "",
+      "id": "investigation-wall-evidence-1",
+      "title": "ΤΕΚΜΗΡΙΟ 1",
+      "description": "Αςtest if there is chance to work automatically",
       "type": "evidence"
     },
     {
-      "id": "timeline-station-2",
-      "title": "ΣΤΑΘΜΟΣ 2 — Γ’-Στ' Χριστολογία",
-      "description": "",
+      "id": "investigation-wall-evidence-2",
+      "title": "ΤΕΚΜΗΡΙΟ 2",
+      "description": "Δεύτερο στοιχείο έρευνας όσον αφορά το μάθημα της θείος Οικονομίας",
       "type": "evidence"
     },
     {
-      "id": "timeline-station-3",
-      "title": "ΣΤΑΘΜΟΣ 3 — Ζ' Οικουμενική",
-      "description": "",
-      "type": "evidence"
-    },
-    {
-      "id": "timeline-station-4",
-      "title": "ΣΤΑΘΜΟΣ 4 — Θέωση Συμεών-Παλαμάς",
-      "description": "",
-      "type": "evidence"
-    },
-    {
-      "id": "timeline-station-5",
-      "title": "ΣΤΑΘΜΟΣ 5 — Σχισμα Καθολικής - Μεταρρύθμιση",
-      "description": "",
+      "id": "investigation-wall-evidence-3",
+      "title": "ΤΕΚΜΗΡΙΟ 3",
+      "description": "30 Στοιχείο έρευνας Οι μαθητές καλουντα να επιλέξουν σχέσεις",
       "type": "evidence"
     }
   ],
   "source": {
     "presentation_id": "1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw",
-    "revision_id": "1dDLjKo3rzu_HQ",
+    "revision_id": "kAjpedYkHuklsQ",
     "slide_number": 1,
-    "slide_object_id": "g3d30da613c4351e8_0",
-    "template_family": "timeline",
-    "context_question": "Σύνδεση δογματικής συνείδησης με τη πράξη της ζωής"
+    "slide_object_id": "tpl_investigation_v1",
+    "template_family": "investigation-wall"
   }
 }
