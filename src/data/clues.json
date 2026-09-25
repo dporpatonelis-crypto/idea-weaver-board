@@ -1,54 +1,124 @@
 {
-  "topic": "Επιστήμη και Θρησκεία",
-  "source": {
-    "type": "google-slides",
-    "presentationTitle": "Lovable 1st slide dynamic Template",
-    "presentationId": "1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw",
-    "slideObjectId": "g3fb4fe8feda_0_0",
-    "slideNumber": 2,
-    "revisionId": "XJ2DTFcLSXKUNg"
-  },
+  "topic": "Lovable 1st slide dynamic Template",
   "clues": [
     {
-      "id": "science-religion-central-position",
-      "title": "Κεντρική θέση",
-      "description": "Χρήσιμη γνώση, με σαφή πνευματικά όρια. Η επιστήμη δεν απορρίπτεται: είναι χρήσιμο εργαλείο του βίου, όχι υποκατάστατο της Αποκάλυψης και της βιωματικής Θεογνωσίας.",
-      "type": "note"
-    },
-    {
-      "id": "science-religion-knowledge-benefits",
-      "title": "Γνώση: οφέλη",
-      "description": "Η θύραθεν παιδεία ως «θεραπαινίδα» και προπαιδεία, κοινό αγαθό· οι όροι «ομοούσιος», «υπόστασις», «ενέργεια» διασαφηνίζουν το δόγμα.",
+      "title": "ΧΡΟΝΟΛΟΓΙΟ  /  ΠΕΝΤΕ ΣΤΑΘΜΟΙ",
+      "description": "",
       "type": "evidence"
     },
     {
-      "id": "science-religion-knowledge-limits",
-      "title": "Γνώση: όρια",
-      "description": "Όταν αυτονομηθεί, ο λόγος εγκλωβίζει τον Θεό σε ορισμούς· η επιστήμη εξηγεί την ύλη, όχι τα πρώτα και έσχατα ερωτήματα.",
+      "title": "Timeline Εκκλησιαστικής Ιστορίας",
+      "description": "",
       "type": "evidence"
     },
     {
-      "id": "science-religion-spiritual-benefit",
-      "title": "Πνεύμα: όφελος",
-      "description": "Η επαγωγική παρατήρηση των νόμων και της αρμονίας της κτίσης μπορεί να στρέψει τον νου στη σοφία του Δημιουργού.",
+      "title": "[ Σύνδεση δογματικής συνείδησης με τη πράξη της ζωής]",
+      "description": "",
       "type": "evidence"
     },
     {
-      "id": "science-religion-spiritual-limits",
-      "title": "Πνεύμα: όρια",
-      "description": "Δεν νικά θάνατο και πάθη ούτε χαρίζει θέωση· η στεγνή ακαδημαϊκή θεολογία κινδυνεύει να αποκοπεί από βίωμα, μετάνοια και Θεοκοινωνία.",
+      "title": "[Έτος]",
+      "description": "",
       "type": "evidence"
     },
     {
-      "id": "science-religion-social-contribution",
-      "title": "Ηθική και κοινωνία: προσφορά",
-      "description": "Οργανώνει την κοινωνία, θεραπεύει ασθένειες και βελτιώνει τον βίο.",
+      "title": "ΣΤΑΘΜΟΣ 1",
+      "description": "",
       "type": "evidence"
     },
     {
-      "id": "science-religion-ethical-risks",
-      "title": "Ηθική και κοινωνία: κίνδυνοι",
-      "description": "Η πολυμάθεια και η τεχνολογία μπορεί να φέρουν οίηση, φιλοκτημοσύνη, εξουσιομανία και μαζοποίηση.",
+      "title": "[Α-Β΄ Οικουμενική]",
+      "description": "",
+      "type": "evidence"
+    },
+    {
+      "title": "[Τι συνέβη",
+      "description": "Γιατί έχει σημασία;]",
+      "type": "evidence"
+    },
+    {
+      "title": "[Έτος]",
+      "description": "",
+      "type": "evidence"
+    },
+    {
+      "title": "ΣΤΑΘΜΟΣ 2",
+      "description": "",
+      "type": "evidence"
+    },
+    {
+      "title": "[Γ’-Στ' Χριστολογία]",
+      "description": "",
+      "type": "evidence"
+    },
+    {
+      "title": "[Τι συνέβη;",
+      "description": "Γιατί έχει σημασία;]",
+      "type": "evidence"
+    },
+    {
+      "title": "[Έτος]",
+      "description": "",
+      "type": "evidence"
+    },
+    {
+      "title": "ΣΤΑΘΜΟΣ 3",
+      "description": "",
+      "type": "evidence"
+    },
+    {
+      "title": "[Ζ' Οικουμενική]",
+      "description": "",
+      "type": "evidence"
+    },
+    {
+      "title": "[Τι συνέβη;",
+      "description": "Γιατί έχει σημασία;]",
+      "type": "evidence"
+    },
+    {
+      "title": "[Έτος]",
+      "description": "",
+      "type": "evidence"
+    },
+    {
+      "title": "ΣΤΑΘΜΟΣ 4",
+      "description": "",
+      "type": "evidence"
+    },
+    {
+      "title": "[θέωση Συμεών-Παλαμάς]",
+      "description": "",
+      "type": "evidence"
+    },
+    {
+      "title": "[Τι συνέβη;",
+      "description": "Γιατί έχει σημασία;]",
+      "type": "evidence"
+    },
+    {
+      "title": "[Έτος]",
+      "description": "",
+      "type": "evidence"
+    },
+    {
+      "title": "ΣΤΑΘΜΟΣ 5",
+      "description": "",
+      "type": "evidence"
+    },
+    {
+      "title": "[Σχισμα Καθολικής - Μεταρρύθμιση]",
+      "description": "",
+      "type": "evidence"
+    },
+    {
+      "title": "[Τι συνέβη;",
+      "description": "Γιατί έχει σημασία;]",
+      "type": "evidence"
+    },
+    {
+      "title": "[Ποιά η συνέπεια στη διαμόρφωση της δογματικής συνείδησης στη Πράξη;]",
+      "description": "",
       "type": "evidence"
     }
   ]
