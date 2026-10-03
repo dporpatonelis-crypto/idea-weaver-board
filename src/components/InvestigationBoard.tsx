@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import { BoardCard, Connection, ConnectionType } from '@/types/board';
 import BoardCardComponent from './BoardCardComponent';
 import ConnectionLines from './ConnectionLines';
@@ -53,11 +53,11 @@ function extractImageUrl(text: string): { text: string; imageUrl?: string } {
   return { text };
 }
 
-function buildCardsFromClues(): BoardCard[] {
+function buildCardsFromClues(dataset?: any): BoardCard[] {
   try {
     // 1. Library override (sessionStorage) — does NOT touch the slides sync target
     const override = readLibraryOverride();
-    const source: any = override ?? cluesData;
+    const source: any = dataset ?? override ?? cluesData;
     if (!source?.clues?.length) return fallbackCards;
     // Grid layout with generous spacing so long cards never overlap
     const COL_W = 240;
@@ -71,14 +71,14 @@ function buildCardsFromClues(): BoardCard[] {
         ? (imageMap[rawImage] || rawImage)
         : (descImage || titleImage);
       return {
-        id: `clue-${i + 1}`,
+        id: String(clue.id || `clue-${i + 1}`),
         title: titleText,
         description: descText,
         type: (clue.type as BoardCard['type']) || 'evidence',
         imageUrl: resolvedImage,
-        x: 40 + (i % COLS) * COL_W,
-        y: 40 + Math.floor(i / COLS) * ROW_H,
-        rotation: (Math.random() - 0.5) * 8,
+        x: Number.isFinite(clue.x) ? clue.x : 40 + (i % COLS) * COL_W,
+        y: Number.isFinite(clue.y) ? clue.y : 40 + Math.floor(i / COLS) * ROW_H,
+        rotation: Number.isFinite(clue.rotation) ? clue.rotation : 0,
       };
     });
   } catch {
@@ -93,13 +93,49 @@ const initialConnections: Connection[] = [
   { id: 'c4', fromId: '3', toId: '1', type: 'agreement' },
 ];
 
+function buildConnections(source: any, cards: BoardCard[]): Connection[] {
+  const ids = new Set(cards.map(card => card.id));
+  const aliases: Record<string, ConnectionType> = {development:'evolution', contrast:'disagreement', question:'occasion'};
+  const types = new Set(['agreement','evolution','disagreement','cause','occasion','consequence']);
+  return (Array.isArray(source?.connections) ? source.connections : initialConnections)
+    .map((connection: any, index: number): Connection => ({
+      id: String(connection.id || `connection-${index + 1}`),
+      fromId: String(connection.fromId ?? connection.from ?? ''),
+      toId: String(connection.toId ?? connection.to ?? ''),
+      type: types.has(connection.type) ? connection.type : (aliases[connection.type] || 'agreement'),
+      label: connection.label ?? connection.description,
+    })).filter((connection: Connection) => ids.has(connection.fromId) && ids.has(connection.toId));
+}
+
 let nextId = 10;
 
 export default function InvestigationBoard() {
   const navigate = useNavigate();
   const initialCards = useMemo(() => buildCardsFromClues(), []);
   const [cards, setCards] = useState<BoardCard[]>(initialCards);
-  const [connections, setConnections] = useState<Connection[]>(initialConnections);
+  const [connections, setConnections] = useState<Connection[]>(() => buildConnections(readLibraryOverride() ?? cluesData, initialCards));
+  const [boardTitle, setBoardTitle] = useState<string>(() => (readLibraryOverride() ?? cluesData as any)?.topic || 'Πίνακας Έρευνας — Υπόθεση Φιλοσόφου');
+  const [previewError, setPreviewError] = useState<string | null>(null);
+  useEffect(() => {
+    const previewUrl = new URLSearchParams(window.location.search).get('dataUrl');
+    if (!previewUrl) return;
+    const controller = new AbortController();
+    setCards([]); setConnections([]);
+    fetch(previewUrl, { cache:'no-store', signal:controller.signal })
+      .then(response => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); })
+      .then(raw => {
+        const data = raw.investigation ?? raw;
+        if (!Array.isArray(data.clues) || !data.clues.length) throw new Error('Invalid investigation preview');
+        const previewCards = buildCardsFromClues(data);
+        setCards(previewCards); setConnections(buildConnections(data, previewCards));
+        setBoardTitle(data.topic || 'Πίνακας Έρευνας');
+      }).catch(error => {
+        if (error.name === 'AbortError') return;
+        console.error('Investigation preview failed:', error);
+        setPreviewError('Σφάλμα φόρτωσης προεπισκόπησης.');
+      });
+    return () => controller.abort();
+  }, []);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [connectingFromId, setConnectingFromId] = useState<string | null>(null);
   const [showAddDialog, setShowAddDialog] = useState(false);
@@ -198,7 +234,7 @@ export default function InvestigationBoard() {
       {/* Header */}
       <header className="flex items-center justify-between px-6 py-3 bg-secondary border-b border-border">
         <h1 className="text-xl font-bold text-foreground tracking-wide">
-          🔍 Πίνακας Έρευνας — Υπόθεση Φιλοσόφου
+          🔍 {previewError || boardTitle}
         </h1>
         <div className="flex items-center gap-3">
           {connectingFromId && (
