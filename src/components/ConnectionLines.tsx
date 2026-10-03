@@ -55,6 +55,7 @@ export default function ConnectionLines({ connections, cards, onDeleteConnection
 
         return (
           <g key={conn.id} className="connection-string">
+            <title>{conn.label || typeLabels[conn.type]}</title>
             {/* String line */}
             <path
               d={`M ${from.x} ${from.y} Q ${cx} ${cy} ${to.x} ${to.y}`}
