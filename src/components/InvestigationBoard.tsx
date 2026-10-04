@@ -1,10 +1,10 @@
-import { useState, useCallback, useMemo, useEffect } from 'react';
+import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import { BoardCard, Connection, ConnectionType } from '@/types/board';
 import BoardCardComponent from './BoardCardComponent';
 import ConnectionLines from './ConnectionLines';
 import AddCardDialog from './AddCardDialog';
 import ConnectionDialog from './ConnectionDialog';
-import { Plus, BookOpen, Save } from 'lucide-react';
+import { Plus, BookOpen, Save, LayoutGrid } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
@@ -14,6 +14,7 @@ import platoImg from '@/assets/plato.jpg';
 import aristotleImg from '@/assets/aristotle.jpg';
 import socratesImg from '@/assets/socrates.jpg';
 import cluesData from '@/data/clues.json';
+import { arrangeCards, cardWidth, normalizeSlideDataset } from '@/lib/board-layout';
 
 const imageMap: Record<string, string> = {
   plato: platoImg,
@@ -24,7 +25,7 @@ const imageMap: Record<string, string> = {
 const LIBRARY_STORAGE_KEY = 'board:library-dataset';
 const SAVED_LIBRARY_KEY = 'board:library-saved';
 
-function readLibraryOverride(): { topic?: string; clues: any[] } | null {
+function readLibraryOverride(): { topic?: string; instruction?: string; clues: any[] } | null {
   try {
     const raw = sessionStorage.getItem(LIBRARY_STORAGE_KEY);
     if (!raw) return null;
@@ -57,13 +58,13 @@ function buildCardsFromClues(dataset?: any): BoardCard[] {
   try {
     // 1. Library override (sessionStorage) — does NOT touch the slides sync target
     const override = readLibraryOverride();
-    const source: any = dataset ?? override ?? cluesData;
+    const source: any = normalizeSlideDataset(dataset ?? override ?? cluesData);
     if (!source?.clues?.length) return fallbackCards;
     // Grid layout with generous spacing so long cards never overlap
     const COL_W = 240;
     const ROW_H = 340;
     const COLS = Math.max(2, Math.floor(((typeof window !== 'undefined' ? window.innerWidth : 1200) - 80) / COL_W));
-    return source.clues.map((clue: any, i: number) => {
+    const cards: BoardCard[] = source.clues.map((clue: any, i: number) => {
       const { text: descText, imageUrl: descImage } = extractImageUrl(clue.description || '');
       const { text: titleText, imageUrl: titleImage } = extractImageUrl(clue.title || '');
       const rawImage = clue.imageUrl || clue.image;
@@ -76,11 +77,14 @@ function buildCardsFromClues(dataset?: any): BoardCard[] {
         description: descText,
         type: (clue.type as BoardCard['type']) || 'evidence',
         imageUrl: resolvedImage,
+        group: clue.group,
         x: Number.isFinite(clue.x) ? clue.x : 40 + (i % COLS) * COL_W,
         y: Number.isFinite(clue.y) ? clue.y : 40 + Math.floor(i / COLS) * ROW_H,
         rotation: Number.isFinite(clue.rotation) ? clue.rotation : 0,
       };
     });
+    const layout = arrangeCards(cards, typeof window !== 'undefined' ? window.innerWidth - 28 : 1200);
+    return layout.groups.length ? layout.cards : cards;
   } catch {
     return fallbackCards;
   }
@@ -111,10 +115,27 @@ let nextId = 10;
 
 export default function InvestigationBoard() {
   const navigate = useNavigate();
-  const initialCards = useMemo(() => buildCardsFromClues(), []);
+  const initialSource = useMemo(() => normalizeSlideDataset(readLibraryOverride() ?? cluesData), []);
+  const [sourceData, setSourceData] = useState(initialSource);
+  const initialCards = useMemo(() => buildCardsFromClues(initialSource), [initialSource]);
+  const boardRef = useRef<HTMLDivElement>(null);
+  const [viewportWidth, setViewportWidth] = useState(window.innerWidth - 28);
+  useEffect(() => {
+    const viewport = boardRef.current;
+    if (!viewport) return;
+    const observer = new ResizeObserver(() => setViewportWidth(viewport.clientWidth));
+    observer.observe(viewport);
+    return () => observer.disconnect();
+  }, []);
+  useEffect(() => {
+    setCards(current => {
+      const layout = arrangeCards(current, viewportWidth);
+      return layout.groups.length ? layout.cards : current;
+    });
+  }, [viewportWidth]);
   const [cards, setCards] = useState<BoardCard[]>(initialCards);
-  const [connections, setConnections] = useState<Connection[]>(() => buildConnections(readLibraryOverride() ?? cluesData, initialCards));
-  const [boardTitle, setBoardTitle] = useState<string>(() => (readLibraryOverride() ?? cluesData as any)?.topic || 'Πίνακας Έρευνας — Υπόθεση Φιλοσόφου');
+  const [connections, setConnections] = useState<Connection[]>(() => buildConnections(initialSource, initialCards));
+  const [boardTitle, setBoardTitle] = useState<string>(() => initialSource?.topic || 'Πίνακας Έρευνας — Υπόθεση Φιλοσόφου');
   const [previewError, setPreviewError] = useState<string | null>(null);
   useEffect(() => {
     const previewUrl = new URLSearchParams(window.location.search).get('dataUrl');
@@ -124,10 +145,11 @@ export default function InvestigationBoard() {
     fetch(previewUrl, { cache:'no-store', signal:controller.signal })
       .then(response => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); })
       .then(raw => {
-        const data = raw.investigation ?? raw;
+        const data = normalizeSlideDataset(raw.investigation ?? raw);
         if (!Array.isArray(data.clues) || !data.clues.length) throw new Error('Invalid investigation preview');
         const previewCards = buildCardsFromClues(data);
         setCards(previewCards); setConnections(buildConnections(data, previewCards));
+        setSourceData(data);
         setBoardTitle(data.topic || 'Πίνακας Έρευνας');
       }).catch(error => {
         if (error.name === 'AbortError') return;
@@ -204,12 +226,11 @@ export default function InvestigationBoard() {
   }, []);
 
   const handleSaveToLibrary = useCallback(() => {
-    const defaultName = (cluesData as any)?.topic || 'Μάθημα';
+    const defaultName = boardTitle || 'Μάθημα';
     const name = window.prompt('Όνομα για αποθήκευση στη βιβλιοθήκη:', defaultName);
     if (!name) return;
     // Snapshot from current source (library override or live slides sync)
-    const source: any = readLibraryOverride() ?? cluesData;
-    const data = { topic: name, clues: source?.clues ?? [] };
+    const data = { ...sourceData, topic: name };
     const file = `${name.replace(/[^\p{L}\p{N}]+/gu, '-').toLowerCase()}-${Date.now()}.json`;
     try {
       const raw = localStorage.getItem(SAVED_LIBRARY_KEY);
@@ -227,21 +248,28 @@ export default function InvestigationBoard() {
     } catch (e: any) {
       toast.error(`Αποτυχία αποθήκευσης: ${e?.message || 'σφάλμα'}`);
     }
-  }, []);
+  }, [boardTitle, sourceData]);
+
+  const layout = arrangeCards(cards, viewportWidth);
+  const canvasWidth = Math.max(layout.width, ...cards.map(card => card.x + cardWidth(card) + 40));
+  const canvasHeight = Math.max(500, ...cards.map(card => card.y + (card.group ? 280 : 380)));
 
   return (
     <div className="w-screen h-screen flex flex-col bg-background overflow-hidden">
       {/* Header */}
-      <header className="flex items-center justify-between px-6 py-3 bg-secondary border-b border-border">
-        <h1 className="text-xl font-bold text-foreground tracking-wide">
+      <header className="flex flex-wrap gap-3 items-center justify-between px-4 py-3 bg-secondary border-b border-border">
+        <h1 className="text-base md:text-xl font-bold text-foreground tracking-wide">
           🔍 {previewError || boardTitle}
         </h1>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2">
           {connectingFromId && (
             <span className="text-sm text-string-agreement animate-pulse">
               ● Σύνδεση ενεργή...
             </span>
           )}
+          <Button onClick={() => setCards(current => arrangeCards(current, viewportWidth).cards)} size="sm" variant="outline" className="gap-1.5">
+            <LayoutGrid size={14} /> Τακτοποίηση
+          </Button>
           <Button onClick={() => setShowAddDialog(true)} size="sm" className="gap-1.5">
             <Plus size={14} />
             Νέο Στοιχείο
@@ -257,9 +285,18 @@ export default function InvestigationBoard() {
         </div>
       </header>
 
+      <div className="px-4 py-2 bg-secondary/70 border-b border-border text-sm text-foreground flex flex-wrap gap-x-4 gap-y-1">
+        <p className="flex-1 min-w-48">{sourceData.instruction || 'Μετακινήστε τα στοιχεία και δημιουργήστε τις δικές σας συνδέσεις.'}</p>
+        <span>{cards.length} στοιχεία · {connections.length} συνδέσεις</span>
+        <details className="relative">
+          <summary className="cursor-pointer">Τύποι συνδέσεων</summary>
+          <p className="absolute right-0 top-6 w-64 p-3 bg-secondary shadow-lg rounded z-[60]">Συμφωνία · Εξέλιξη · Αντίθεση · Αιτία · Αφορμή · Συνέπεια</p>
+        </details>
+      </div>
       {/* Board */}
       <div
-        className="flex-1 relative cork-texture overflow-auto"
+        ref={boardRef}
+        className="flex-1 min-h-0 relative cork-texture overflow-auto"
         style={{
           backgroundImage: `url(${corkBg})`,
           borderImage: `url(${woodFrame}) 30 round`,
@@ -267,6 +304,12 @@ export default function InvestigationBoard() {
           borderStyle: 'solid',
         }}
       >
+        <div className="relative" style={{ width: canvasWidth, height: canvasHeight }}>
+          {layout.groups.map(group => (
+            <h2 key={group.title} className="absolute top-4 rounded bg-secondary/95 px-3 py-2 text-base font-bold text-foreground text-center" style={{ left: group.x, width: group.width }}>
+              {group.title} <span className="text-sm font-normal">· {group.count} στοιχεία</span>
+            </h2>
+          ))}
         <ConnectionLines
           connections={connections}
           cards={cards}
@@ -288,29 +331,6 @@ export default function InvestigationBoard() {
           />
         ))}
 
-        {/* Legend */}
-        <div className="absolute bottom-4 left-4 aged-paper rounded p-3 z-20">
-          <h4 className="text-xs font-bold text-card-foreground mb-2 uppercase tracking-wider">Συνδέσεις</h4>
-          <div className="space-y-1">
-            <div className="flex items-center gap-2 text-xs text-card-foreground">
-              <span className="w-6 h-0.5 bg-string-agreement" /> Συμφωνία
-            </div>
-            <div className="flex items-center gap-2 text-xs text-card-foreground">
-              <span className="w-6 h-0.5 bg-string-evolution" /> Εξέλιξη
-            </div>
-            <div className="flex items-center gap-2 text-xs text-card-foreground">
-              <span className="w-6 h-0.5 bg-string-disagreement" /> Αντίθεση
-            </div>
-            <div className="flex items-center gap-2 text-xs text-card-foreground">
-              <span className="w-6 h-0.5 bg-string-cause" /> Αιτία
-            </div>
-            <div className="flex items-center gap-2 text-xs text-card-foreground">
-              <span className="w-6 h-0.5 bg-string-occasion" /> Αφορμή
-            </div>
-            <div className="flex items-center gap-2 text-xs text-card-foreground">
-              <span className="w-6 h-0.5 bg-string-consequence" /> Συνέπεια
-            </div>
-          </div>
         </div>
       </div>
 

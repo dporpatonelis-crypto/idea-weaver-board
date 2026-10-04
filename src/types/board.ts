@@ -4,6 +4,8 @@ export interface BoardCard {
   description: string;
   type: 'suspect' | 'evidence' | 'note';
   imageUrl?: string;
+  group?: string;
+  width?: number;
   x: number;
   y: number;
   rotation: number;

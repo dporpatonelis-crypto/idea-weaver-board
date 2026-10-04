@@ -1,3 +1,4 @@
+import { cardWidth } from '@/lib/board-layout';
 import { Connection, ConnectionType, BoardCard } from '@/types/board';
 
 interface Props {
@@ -25,7 +26,7 @@ const typeLabels: Record<ConnectionType, string> = {
 };
 
 function getCardCenter(card: BoardCard): { x: number; y: number } {
-  const width = card.type === 'note' ? 160 : 180;
+  const width = cardWidth(card);
   return { x: card.x + width / 2, y: card.y + 50 };
 }
 

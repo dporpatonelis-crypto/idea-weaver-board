@@ -1,4 +1,5 @@
 import { useRef, useCallback, useState, useEffect } from 'react';
+import { cardWidth } from '@/lib/board-layout';
 import { BoardCard, ConnectionType } from '@/types/board';
 import { X, GripVertical } from 'lucide-react';
 import paperTexture from '@/assets/paper-texture.jpg';
@@ -95,12 +96,13 @@ export default function BoardCardComponent({
 
   return (
     <div
+      data-card-id={card.id}
       className={`absolute select-none touch-none transition-shadow duration-200 flip-container ${isDragging ? 'z-50 scale-105' : 'z-10'} ${isSelected ? 'ring-2 ring-accent ring-offset-2 ring-offset-cork' : ''}`}
       style={{
         left: card.x,
         top: card.y,
         transform: `rotate(${card.rotation}deg)`,
-        width: card.type === 'note' ? 160 : 180,
+        width: cardWidth(card),
         touchAction: 'none',
       }}
       onPointerDown={handlePointerDown}
@@ -123,6 +125,7 @@ export default function BoardCardComponent({
             <button
               className="no-drag absolute -top-1 -right-1 w-5 h-5 rounded-full bg-destructive text-destructive-foreground flex items-center justify-center opacity-0 group-hover:opacity-100 hover:opacity-100 transition-opacity text-xs z-20"
               style={{ opacity: isSelected ? 1 : undefined }}
+              aria-label={`Διαγραφή: ${card.title}`}
               onClick={(e) => { e.stopPropagation(); onDelete(card.id); }}
             >
               <X size={10} />
@@ -130,9 +133,10 @@ export default function BoardCardComponent({
 
             {/* Connect handle */}
             <button
-              className="no-drag absolute -right-2 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-accent text-accent-foreground flex items-center justify-center hover:scale-110 transition-transform z-20"
+              className="no-drag absolute -right-3 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-accent text-accent-foreground flex items-center justify-center hover:scale-110 transition-transform z-20"
               onClick={(e) => { e.stopPropagation(); onConnectionStart(card.id); }}
               title="Σύνδεση"
+              aria-label={`Σύνδεση: ${card.title}`}
             >
               <GripVertical size={10} />
             </button>
@@ -150,13 +154,13 @@ export default function BoardCardComponent({
             )}
 
             {/* Title */}
-            <h3 className="font-bold text-sm text-card-foreground leading-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
+            <h3 className="font-bold text-base text-card-foreground leading-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
               {card.title}
             </h3>
 
             {/* Description */}
             {card.description && (
-              <p className="text-xs text-card-foreground/70 mt-1 leading-snug overflow-hidden" style={{ fontFamily: "'Crimson Text', serif", maxHeight: 200 }}>
+              <p className="text-sm text-card-foreground/90 mt-2 leading-snug whitespace-pre-line overflow-auto no-drag" style={{ fontFamily: "'Crimson Text', serif", maxHeight: 200 }}>
                 {card.description}
               </p>
             )}
@@ -168,7 +172,7 @@ export default function BoardCardComponent({
                 ${card.type === 'evidence' ? 'bg-accent/20 text-accent' : ''}
                 ${card.type === 'note' ? 'bg-cork-dark/20 text-cork-dark' : ''}
               `}>
-                {card.type === 'suspect' ? 'Ύποπτος' : card.type === 'evidence' ? 'Πειστήριο' : 'Σημείωση'}
+                {card.type === 'suspect' ? 'Ύποπτος' : card.type === 'evidence' ? (card.group ? 'Στοιχείο' : 'Πειστήριο') : 'Σημείωση'}
               </span>
             </div>
           </div>
