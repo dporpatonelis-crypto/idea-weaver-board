@@ -1,0 +1,57 @@
+[
+  {
+    "titles": [
+      "Πλάκες του Νόμου",
+      "Οι Πλάκες του Νόμου"
+    ],
+    "path": "images/typology/tablets.webp",
+    "libraryFileId": "libfile_5f60993adee88191979fc226309c5b7d",
+    "sourceFilename": "Διπλές πέτρινες πλάκες του νόμου.png"
+  },
+  {
+    "titles": [
+      "Κιβωτός της Διαθήκης",
+      "Η Κιβωτός της Διαθήκης"
+    ],
+    "path": "images/typology/ark.webp",
+    "libraryFileId": "libfile_0914163a8414819189f34e089c42a464",
+    "sourceFilename": "Χρυσή Κιβωτός της Διαθήκης με Χερουβείμ.png"
+  },
+  {
+    "titles": [
+      "Στάμνα με το Μάννα",
+      "Η Στάμνος με το Μάννα",
+      "Στάμνος με μάννα"
+    ],
+    "path": "images/typology/manna.webp",
+    "libraryFileId": "libfile_1070d412330881919b50781027fd6a61",
+    "sourceFilename": "Ανοιχτό χρυσό αγγείο με μάννα.png"
+  },
+  {
+    "titles": [
+      "Ράβδος του Ααρών",
+      "Η Ράβδος του Ααρών"
+    ],
+    "path": "images/typology/rod.webp",
+    "libraryFileId": "libfile_10f60b127d0c8191b9726f54564cf3d5",
+    "sourceFilename": "Ανθισμένη ράβδος του Ααρών.png"
+  },
+  {
+    "titles": [
+      "Χάλκινος Όφις",
+      "Ο Χάλκινος Όφις"
+    ],
+    "path": "images/typology/serpent.webp",
+    "libraryFileId": "libfile_b00484204a848191a42299dc0d3f64ec",
+    "sourceFilename": "Χάλκινο φίδι σε ξύλινο στύλο.png"
+  },
+  {
+    "titles": [
+      "Πασχάλιος Αμνός",
+      "Ο Πασχάλιος Αμνός"
+    ],
+    "path": "images/typology/lamb.webp",
+    "libraryFileId": "libfile_36378e027d0081919cd858b291fe455c",
+    "sourceFilename": "Άμωμος λευκός αμνός του Πάσχα.png"
+  }
+]

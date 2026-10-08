@@ -4,7 +4,9 @@ import BoardCardComponent from './BoardCardComponent';
 import ConnectionLines from './ConnectionLines';
 import AddCardDialog from './AddCardDialog';
 import ConnectionDialog from './ConnectionDialog';
-import { Plus, BookOpen, Save, LayoutGrid } from 'lucide-react';
+import MatchingPuzzleDialog from './MatchingPuzzleDialog';
+import { buildMatchingLesson, MatchingPuzzleConfig } from '@/lib/matching-puzzle';
+import { Plus, BookOpen, Save, LayoutGrid, Puzzle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
@@ -25,7 +27,7 @@ const imageMap: Record<string, string> = {
 const LIBRARY_STORAGE_KEY = 'board:library-dataset';
 const SAVED_LIBRARY_KEY = 'board:library-saved';
 
-function readLibraryOverride(): { topic?: string; instruction?: string; clues: any[] } | null {
+function readLibraryOverride(): { topic?: string; instruction?: string; matchingPuzzle?: MatchingPuzzleConfig; clues: any[] } | null {
   try {
     const raw = sessionStorage.getItem(LIBRARY_STORAGE_KEY);
     if (!raw) return null;
@@ -160,6 +162,8 @@ export default function InvestigationBoard() {
   }, []);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [connectingFromId, setConnectingFromId] = useState<string | null>(null);
+  const [showPuzzle, setShowPuzzle] = useState(false);
+  const matchingLesson = useMemo(() => buildMatchingLesson(buildCardsFromClues(sourceData), sourceData.matchingPuzzle), [sourceData]);
   const [showAddDialog, setShowAddDialog] = useState(false);
   const [showConnectionDialog, setShowConnectionDialog] = useState(false);
   const [pendingConnectionTo, setPendingConnectionTo] = useState<string | null>(null);
@@ -267,6 +271,9 @@ export default function InvestigationBoard() {
               ● Σύνδεση ενεργή...
             </span>
           )}
+          {matchingLesson && <Button onClick={() => { setConnectingFromId(null); setShowPuzzle(true); }} size="sm" variant="outline" className="gap-1.5">
+            <Puzzle size={14} /> Puzzle
+          </Button>}
           <Button onClick={() => setCards(current => arrangeCards(current, viewportWidth).cards)} size="sm" variant="outline" className="gap-1.5">
             <LayoutGrid size={14} /> Τακτοποίηση
           </Button>
@@ -334,6 +341,7 @@ export default function InvestigationBoard() {
         </div>
       </div>
 
+      {matchingLesson && <MatchingPuzzleDialog open={showPuzzle} onClose={() => setShowPuzzle(false)} lesson={matchingLesson} topic={boardTitle} />}
       <AddCardDialog open={showAddDialog} onClose={() => setShowAddDialog(false)} onAdd={handleAddCard} />
       <ConnectionDialog
         open={showConnectionDialog}
