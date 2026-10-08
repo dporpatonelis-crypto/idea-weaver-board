@@ -156,7 +156,7 @@ export default function Library() {
                         ? 'bg-string-agreement/20 text-string-agreement'
                         : 'bg-muted text-muted-foreground'
                     }`}>
-                      {entry.source === 'saved' ? 'Αποθηκευμένο' : 'Bundled'}
+                      {entry.source === 'saved' ? 'Στον browser' : 'Μόνιμο'}
                     </span>
                   </div>
                   {entry.description && (

@@ -57,3 +57,19 @@ lessons can supply their own image URLs or extend this media manifest.
 
 The six Old Testament pairs in `src/data/clues.json` follow the teacher's
 supplied source table. Their shuffled display order does not encode the key.
+
+## Permanent library lesson
+
+`src/data/library/typology-shadow-fulfillment-puzzle.json` is the permanent
+snapshot of this lesson, including its groups, six answer pairs and empty board
+connections. It is discovered automatically by the Library page. Loading it
+restores the puzzle and the six hosted illustrations even after another slide
+replaces `src/data/clues.json`; ordinary slide sync must leave library files and
+media assets intact.
+
+The board's Save button keeps the complete source dataset, including
+`matchingPuzzle`, in localStorage for that browser. The Library download button
+exports that dataset as JSON. Browser saves survive a slide sync but are not
+shared across devices and disappear if that browser's site data is cleared.
+Permanent entries are checked into the repository and labelled «Μόνιμο»;
+browser saves are labelled «Στον browser».

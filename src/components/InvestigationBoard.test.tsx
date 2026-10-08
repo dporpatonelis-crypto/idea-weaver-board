@@ -40,5 +40,6 @@ describe('lesson interactions', () => {
     expect(saved.clues.every((card:{group?:string})=>card.group)).toBe(true);
     expect(saved.instruction).toMatch(/Αιτιολογήστε|αιτιολογήστε/);
     expect(saved.connections).toEqual([]);
+    expect(saved.matchingPuzzle.answers).toHaveLength(6);
   });
 });
