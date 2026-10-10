@@ -1,120 +1,128 @@
 {
-  "topic": "Τυπολογία Παλαιάς Διαθήκης — Σκιά και Πλήρωση",
-  "instruction": "Πώς συνδέεται κάθε «Σκιά» με την «Πλήρωση»; Δημιουργήστε και αιτιολογήστε τις συνδέσεις σας.",
+  "topic": "Η πρώτη Εκκλησία των Ιεροσολύμων",
   "clues": [
     {
-      "id": "typology-evidence-1",
-      "title": "Πλάκες του Νόμου",
-      "description": "Λίθινες, άψυχες πλάκες στο Σινά",
+      "id": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_01",
+      "title": "Φλόγα",
+      "description": "Γλώσσα φωτιάς.",
       "type": "evidence",
-      "group": "Παλαιά Διαθήκη · Σκιά"
+      "group": "ΑΝΤΙΚΕΙΜΕΝΑ"
     },
     {
-      "id": "typology-evidence-3",
-      "title": "Κιβωτός της Διαθήκης",
-      "description": "Σημείο της παρουσίας της δόξας του Θεού",
+      "id": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_02",
+      "title": "Ευχαριστία / Σύναξη",
+      "description": "Η κοινότητα συνάγεται στην ευχαριστιακή τράπεζα.",
       "type": "evidence",
-      "group": "Παλαιά Διαθήκη · Σκιά"
+      "group": "ΣΗΜΑΣΙΕΣ"
     },
     {
-      "id": "typology-evidence-5",
-      "title": "Στάμνα με το Μάννα",
-      "description": "Υλική τροφή στην έρημο",
+      "id": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_03",
+      "title": "Κύλινδρος",
+      "description": "Ανοιχτός κύλινδρος με κείμενο.",
       "type": "evidence",
-      "group": "Παλαιά Διαθήκη · Σκιά"
+      "group": "ΑΝΤΙΚΕΙΜΕΝΑ"
     },
     {
-      "id": "typology-evidence-7",
-      "title": "Ράβδος του Ααρών",
-      "description": "Ξύλο που βλάστησε επιβεβαιώνοντας την εκλογή",
+      "id": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_04",
+      "title": "Διακονία / Φροντίδα",
+      "description": "Προσφορά και φροντίδα όσων έχουν ανάγκη.",
       "type": "evidence",
-      "group": "Παλαιά Διαθήκη · Σκιά"
+      "group": "ΣΗΜΑΣΙΕΣ"
     },
     {
-      "id": "typology-evidence-9",
-      "title": "Χάλκινος Όφις",
-      "description": "Σωτηρία από το δηλητήριο των φιδιών στην έρημο",
+      "id": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_05",
+      "title": "Σανδάλια",
+      "description": "Σανδάλια ψαρά.",
       "type": "evidence",
-      "group": "Παλαιά Διαθήκη · Σκιά"
+      "group": "ΑΝΤΙΚΕΙΜΕΝΑ"
     },
     {
-      "id": "typology-evidence-11",
-      "title": "Πασχάλιος Αμνός",
-      "description": "Αίμα που σώζει από τον ολεθρευτή άγγελο",
+      "id": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_06",
+      "title": "Άγιο Πνεύμα / Χαρίσματα",
+      "description": "Ζωοποιεί και συγκροτεί την Εκκλησία.",
       "type": "evidence",
-      "group": "Παλαιά Διαθήκη · Σκιά"
+      "group": "ΣΗΜΑΣΙΕΣ"
     },
     {
-      "id": "typology-evidence-6",
-      "title": "Θεία Ευχαριστία",
-      "description": "Θεία Ευχαριστία, Ο «Άρτος της Ζωής»",
+      "id": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_07",
+      "title": "Άρτος και οίνος",
+      "description": "Ψωμί και κύπελλο με κρασί.",
       "type": "evidence",
-      "group": "Καινή Διαθήκη · Πλήρωση"
+      "group": "ΑΝΤΙΚΕΙΜΕΝΑ"
     },
     {
-      "id": "typology-evidence-8",
-      "title": "Αειπαρθενία και Τίμιο Ξύλο",
-      "description": "Αειπαρθενία Θεοτόκου, Το Τίμιο Ξύλο του Σταυρού",
+      "id": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_08",
+      "title": "Κοινωνία / Κοινοκτημοσύνη",
+      "description": "Μοίρασμα αγαθών και κοινή ζωή.",
       "type": "evidence",
-      "group": "Καινή Διαθήκη · Πλήρωση"
+      "group": "ΣΗΜΑΣΙΕΣ"
     },
     {
-      "id": "typology-evidence-12",
-      "title": "Αμνός του Θεού",
-      "description": "Ο «Αμνός του Θεού», Το οικουμενικό Πάσχα",
+      "id": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_09",
+      "title": "Νομίσματα",
+      "description": "Χρήματα συγκεντρωμένα μαζί.",
       "type": "evidence",
-      "group": "Καινή Διαθήκη · Πλήρωση"
+      "group": "ΑΝΤΙΚΕΙΜΕΝΑ"
     },
     {
-      "id": "typology-evidence-2",
-      "title": "Νόμος στις ανθρώπινες καρδιές",
-      "description": "Ο Νόμος γράφεται στις πλάκες των ανθρώπινων καρδιών",
+      "id": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_10",
+      "title": "Διδασκαλία / Σοφία",
+      "description": "«ἀγραμμάτους σοφίαν ἐδίδαξεν»",
       "type": "evidence",
-      "group": "Καινή Διαθήκη · Πλήρωση"
+      "group": "ΣΗΜΑΣΙΕΣ"
     },
     {
-      "id": "typology-evidence-10",
-      "title": "Θυσία του Χριστού",
-      "description": "Θυσία του Χριστού που θεραπεύει το δηλητήριο της αμαρτίας",
+      "id": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_11",
+      "title": "Καλάθι",
+      "description": "Καλάθι με αγαθά.",
       "type": "evidence",
-      "group": "Καινή Διαθήκη · Πλήρωση"
+      "group": "ΑΝΤΙΚΕΙΜΕΝΑ"
     },
     {
-      "id": "typology-evidence-4",
-      "title": "Έμψυχος Κιβωτός",
-      "description": "Η «Έμψυχος Κιβωτός» (Θεοτόκος), Η καρδιά του πιστού",
+      "id": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_12",
+      "title": "Αποστολή / Μαρτυρία",
+      "description": "«ἁλιεῖς θεολόγους ἀνέδειξεν»",
       "type": "evidence",
-      "group": "Καινή Διαθήκη · Πλήρωση"
+      "group": "ΣΗΜΑΣΙΕΣ"
     }
   ],
   "connections": [],
+  "source": {
+    "type": "google-slides",
+    "presentationId": "1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw",
+    "presentationTitle": "Lovable 1st slide dynamic Template",
+    "slideObjectId": "upper_room_six_objects_v1",
+    "slideNumber": 1,
+    "revisionId": "UeU6y7hTUwG6ew"
+  },
+  "instruction": "Συνδέστε τα αντικείμενα με τις σημασίες τους και αιτιολογήστε με τον ύμνο της Πεντηκοστής.",
   "matchingPuzzle": {
-    "itemGroup": "Παλαιά Διαθήκη · Σκιά",
-    "slotGroup": "Καινή Διαθήκη · Πλήρωση",
+    "itemGroup": "ΑΝΤΙΚΕΙΜΕΝΑ",
+    "slotGroup": "ΣΗΜΑΣΙΕΣ",
     "answers": [
       {
-        "itemId": "typology-evidence-1",
-        "slotId": "typology-evidence-2"
+        "itemId": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_01",
+        "slotId": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_06"
       },
       {
-        "itemId": "typology-evidence-3",
-        "slotId": "typology-evidence-4"
+        "itemId": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_03",
+        "slotId": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_10"
       },
       {
-        "itemId": "typology-evidence-5",
-        "slotId": "typology-evidence-6"
+        "itemId": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_05",
+        "slotId": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_12"
       },
       {
-        "itemId": "typology-evidence-7",
-        "slotId": "typology-evidence-8"
+        "itemId": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_07",
+        "slotId": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_02"
       },
       {
-        "itemId": "typology-evidence-9",
-        "slotId": "typology-evidence-10"
+        "itemId": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_09",
+        "slotId": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_08"
       },
       {
-        "itemId": "typology-evidence-11",
-        "slotId": "typology-evidence-12"
+        "itemId": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_11",
+        "slotId": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_04"
       }
     ]
   }
