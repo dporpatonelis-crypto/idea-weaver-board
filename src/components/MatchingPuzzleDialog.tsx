@@ -96,7 +96,7 @@ export default function MatchingPuzzleDialog({ open, onClose, lesson, topic }: P
         setSelected(current => current === item.id ? null : item.id);
         setAnnouncement(`Επιλέχθηκε: ${item.title}. Επιλέξτε υποδοχή.`);
       }}>
-      {imageUrl && <img src={imageUrl} alt={item.title} draggable={false} className="w-full h-28 object-contain mb-2 pointer-events-none rounded bg-white/90" />}
+      {imageUrl && <img src={imageUrl} alt={item.title} draggable={false} className="w-full h-20 object-contain mb-2 pointer-events-none rounded bg-white/90" />}
       <span className="flex gap-2 items-start font-bold text-base"><GripVertical size={18} className="mt-0.5 shrink-0" />{item.title}</span>
       {item.description && <span className="block mt-2 text-sm leading-snug whitespace-pre-line">{item.description}</span>}
     </button>;
