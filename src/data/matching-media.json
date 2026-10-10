@@ -53,5 +53,89 @@
     "path": "images/typology/lamb.webp",
     "libraryFileId": "libfile_36378e027d0081919cd858b291fe455c",
     "sourceFilename": "Άμωμος λευκός αμνός του Πάσχα.png"
+  },
+  {
+    "titles": [
+      "Φλόγα"
+    ],
+    "path": "images/upper-room/flame.webp",
+    "libraryFileId": "libfile_b67ce8640cf4819182a33b1db1307f60",
+    "sourceFilename": "Περίτεχνος Χάλκινος Βωμός με Ιερά Σύμβολα.png",
+    "cropBounds": [
+      510,
+      45,
+      717,
+      465
+    ]
+  },
+  {
+    "titles": [
+      "Κύλινδρος"
+    ],
+    "path": "images/upper-room/scroll.webp",
+    "libraryFileId": "libfile_b67ce8640cf4819182a33b1db1307f60",
+    "sourceFilename": "Περίτεχνος Χάλκινος Βωμός με Ιερά Σύμβολα.png",
+    "cropBounds": [
+      185,
+      135,
+      498,
+      350
+    ]
+  },
+  {
+    "titles": [
+      "Σανδάλια"
+    ],
+    "path": "images/upper-room/sandals.webp",
+    "libraryFileId": "libfile_b67ce8640cf4819182a33b1db1307f60",
+    "sourceFilename": "Περίτεχνος Χάλκινος Βωμός με Ιερά Σύμβολα.png",
+    "cropBounds": [
+      775,
+      137,
+      1035,
+      329
+    ]
+  },
+  {
+    "titles": [
+      "Άρτος και οίνος"
+    ],
+    "path": "images/upper-room/bread-wine.webp",
+    "libraryFileId": "libfile_b67ce8640cf4819182a33b1db1307f60",
+    "sourceFilename": "Περίτεχνος Χάλκινος Βωμός με Ιερά Σύμβολα.png",
+    "cropBounds": [
+      939,
+      306,
+      1235,
+      568
+    ]
+  },
+  {
+    "titles": [
+      "Νομίσματα"
+    ],
+    "path": "images/upper-room/coins.webp",
+    "libraryFileId": "libfile_b67ce8640cf4819182a33b1db1307f60",
+    "sourceFilename": "Περίτεχνος Χάλκινος Βωμός με Ιερά Σύμβολα.png",
+    "cropBounds": [
+      769,
+      590,
+      1040,
+      786
+    ]
+  },
+  {
+    "titles": [
+      "Καλάθι"
+    ],
+    "path": "images/upper-room/basket.webp",
+    "libraryFileId": "libfile_b67ce8640cf4819182a33b1db1307f60",
+    "sourceFilename": "Περίτεχνος Χάλκινος Βωμός με Ιερά Σύμβολα.png",
+    "cropBounds": [
+      212,
+      570,
+      488,
+      787
+    ]
   }
 ]
